@@ -1,0 +1,95 @@
+.cart{
+    padding: 20px 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.cart .minimalist-scrollbar{
+    flex: 1;
+}
+.cart h4, .cart .cart-products-list{
+    padding: 0 20px;
+}
+.cart h4{
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+.cart .cart-products-list{
+    margin-bottom: 20px;
+    list-style: none;
+    flex: 1;
+}
+.cart .cart-products-list li{
+    margin-bottom: 80px;
+}
+.cart .cart-products-list li .product-info{
+    display: flex;
+    margin-bottom: 18px;
+}
+.cart .cart-products-list li .product-info img{
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+.cart .cart-products-list li .product-info .details{
+    flex: 1;
+    padding: 0 10px;
+}
+.cart .cart-products-list li .product-info .details span,
+.cart .cart-products-list li .product-info .details a{
+    display: block;
+    text-decoration: none;
+}
+.cart .cart-products-list li .product-info .details .brand{
+    color: var(--gray);
+    font-size: .8rem;
+    margin-bottom: 2px;
+}
+.cart .cart-products-list li .product-info .details .name{
+    color: inherit;
+    font-weight: 500;
+    font-size: .9rem;
+    margin-bottom: 10px;
+}
+.cart .cart-products-list li .product-info .details .quantity{
+    width: 60px;
+    height: 30px;
+    line-height: 1.8;
+    text-align: center;
+    border: 1px solid var(--light-gray);
+    border-radius: 3px;
+}
+.cart .cart-products-list li .product-info .button-delete button{
+    color: var(--primary);
+    background: transparent;
+}
+.cart .cart-products-list li .total{
+    text-align: right;
+}
+.cart .cart-products-list li .total .label{
+    color: var(--gray);
+    font-size: .8rem;
+    margin-right: 20px;
+}
+
+.cart .checkout-section{
+    border-top: 1px solid var(--light-gray);
+    padding: 30px 20px;
+}
+.cart .checkout-section .total{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.cart .checkout-section .total .label{
+    color: var(--light-gray);
+}
+.cart .checkout-section .total b{
+    font-size: 1.1rem;
+}
+.cart .checkout-section .buy-button{
+    background: var(--primary);
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+}
