@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch } from 'react-redux';
-import { postCategory } from '../store/slices/products.slice';
+import { postCategory } from '../store/slices/category.slice';
 
 
 const AddProduct = () => {
@@ -28,6 +28,7 @@ const AddProduct = () => {
                     {...register("name")}
                     type="text"
                     placeholder="Title"
+                    required
                   />
                 </Form.Group>
                 

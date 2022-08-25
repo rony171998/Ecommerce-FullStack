@@ -7,20 +7,19 @@ import { DelProductsToCart ,getCarts } from "../store/slices/products.slice";
 const Cart = () => {
 
     const dispatch = useDispatch();
-
-    let cart = useSelector(state => state.products);
-
     const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getCarts());
     }, [dispatch]);
 
-
     const removeItem = (id) => {
         dispatch(DelProductsToCart(id));
         dispatch(getCarts());
     }
+    let cart = useSelector(state => state.products);
+
+    console.log(cart);
     
     return (
         <div>
@@ -47,7 +46,7 @@ const Cart = () => {
 
                 </thead>
 
-                <tbody >
+                <tr >
                     {
                         cart.map((cartItem) => (
 
@@ -56,8 +55,8 @@ const Cart = () => {
                                 <td >{cartItem.title}</td>
                                 <td >{cartItem.quantity}</td>
                                 <td>$ {cartItem.price}</td>
-                                <td>$ {cartItem.quantity * cartItem.price}.00
-                                </td>
+                                <td>$ {cartItem.quantity * cartItem.price}.00</td>
+                                
                                 
                                 <Button variant="" onClick={() => removeItem(cartItem.id)}>Delete</Button>
 
@@ -68,7 +67,7 @@ const Cart = () => {
                     }
 
 
-                </tbody>
+                </tr>
 
                 <Button onClick={() => navigate("/cart/formdata")}>Chekout</Button>
             </table>

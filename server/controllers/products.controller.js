@@ -17,7 +17,8 @@ const createProduct = catchAsync(async (req, res, next) => {
         quantity,
         userId: sessionUser.id,
     });
-
+    console.log(req.files);
+    console.log(req);
     if (req.files.length > 0) {
         const filesPromises = req.files.map(async file => {
             const imgRef = ref(
@@ -118,7 +119,7 @@ const deleteProduct = catchAsync(async (req, res, next) => {
     const { product } = req;
 
     await product.update({ status: "deleted" });
-
+    
     res.status(200).json({ status: "success" });
 });
 

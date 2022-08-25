@@ -6,3 +6,5 @@ export {default as Weather} from "./Weather";
 export {default as SimilarProducts} from "./SimilarProducts";
 export {default as ProductCard} from "./ProductCard";
 export {default as ProductDetail} from "./ProductDetail";
+export {default as UserProducts} from "./UserProducts";
+export {default as ListCategories} from "./ListCategories";

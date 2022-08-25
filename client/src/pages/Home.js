@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
     Button,
     Card,
@@ -10,36 +9,27 @@ import {
     Row,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { filterCategory, filterProductsByName, filterProductsByPrices, getProducts ,addProductsToCart ,pachProductsToCart} from "../store/slices/products.slice";
-import { Weather , ProductCard, LoadingScreen } from "../components";
+import {  filterProductsByName, filterProductsByPrices, getProducts ,addProductsToCart ,pachProductsToCart ,} from "../store/slices/products.slice";
+import { Weather , ProductCard, LoadingScreen, ListCategories } from "../components";
 
 
 
 const Home = () => {
     const dispatch = useDispatch();
 
-    const [categories, setCategories] = useState([]);
     const [search, setSearch] = useState("");
     const [priceRangeMin, setPriceRangeMin] = useState(0);
     const [priceRangeMax, setPriceRangeMax] = useState(1000);
     const [quantity, setQuantity] = useState(1);
 
-    
+    const [products, setProducts] = useState(useSelector(state => state.products));
+
     const isLoading = useSelector((state) => state.isLoading);
 
     useEffect(() => {
-        dispatch(getProducts());       
-
-        axios
-            .get(
-                "/products/categories"
-            )
-            .then(res => setCategories(res.data));
+        dispatch(getProducts());  
+            
     }, [dispatch]);
-
-    const selectCategory = id => {
-        dispatch(filterCategory(id));
-    };
 
     const searchProduct = id => {
         dispatch(filterProductsByName(id));
@@ -69,20 +59,7 @@ const Home = () => {
             <Row>
                 <Col lg={3} className="mb-3">
                     
-                    <ListGroup className="mb-3 mt-3">
-                        <Card.Header className="bg-primary">
-                            <Card.Title className="text-white">Categories</Card.Title>
-                        </Card.Header>
-                        {categories.categories?.map(category => (
-                            <ListGroup.Item
-                                action
-                                key={category.id}
-                                onClick={() => selectCategory(category.id)}
-                            >
-                                {category.name}
-                            </ListGroup.Item>
-                        ))}
-                    </ListGroup >
+                    <ListCategories setProducts={setProducts} products={products}/>
                     
                     <ListGroup className="mb-3">
 
@@ -90,8 +67,7 @@ const Home = () => {
                             <Card.Title className="text-white">Range of prices</Card.Title>
                         </Card.Header>
 
-                        <ListGroup.Item >
-                            
+                        <ListGroup.Item >                           
 
                             <InputGroup className="mb-3">
                                 <InputGroup.Text>
@@ -107,10 +83,7 @@ const Home = () => {
                                     max={10000}
                                     aria-label="amoun"
                                 />
-                                
-                                <InputGroup.Text>
-                                    .00
-                                </InputGroup.Text>
+                                                                
                             </InputGroup>
 
                             <InputGroup className="mb-3">
@@ -124,11 +97,7 @@ const Home = () => {
                                 min={0}
                                 max={10000}
                                 type="Number"
-                                />
-                                <InputGroup.Text>
-                                    .00
-                                </InputGroup.Text>
-                                
+                                />                                                             
                               
                             </InputGroup>
                             
@@ -162,7 +131,7 @@ const Home = () => {
                     </InputGroup>
                     {isLoading && <LoadingScreen />}
 
-                    <ProductCard addToCard={addToCard}/>
+                    <ProductCard addToCard={addToCard} products={products}/>
                 </Col>
             </Row>
         </div>

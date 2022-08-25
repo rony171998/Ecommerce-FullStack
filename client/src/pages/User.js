@@ -5,12 +5,12 @@ import { Button, Card } from "react-bootstrap";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyProducts } from "../store/slices/products.slice";
-import { LoadingScreen } from "../components";
+import { LoadingScreen, UserProducts } from "../components";
 
 const User = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    let user = useSelector(state => state.products);
+    
     let isLoading = useSelector(state => state.products.isLoading);
     
     const logout = () => {
@@ -21,7 +21,10 @@ const User = () => {
 
     useEffect(() => {
         dispatch(getMyProducts());
+        
     }, [dispatch]);
+    
+    let user = useSelector(state => state.products);
     
     return (
         <>
@@ -44,6 +47,8 @@ const User = () => {
                             <Button onClick={logout}>Log out</Button>
                         </Card.Body>
                     </Card>
+                    <UserProducts userproducts={user.products} />
+                    
                     
                 </>
                 

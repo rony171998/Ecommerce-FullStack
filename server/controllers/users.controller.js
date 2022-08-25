@@ -1,7 +1,10 @@
+const { ref, uploadBytes, getDownloadURL } = require("firebase/storage");
+const { storage } = require("../utils/firebase.util");
 // Models
 const { User } = require('../models/user.model');
 const { Order } = require('../models/order.model');
 const { Product } = require('../models/product.model');
+const { ProductImg } = require('../models/productImg.model');
 
 
 // Utils
@@ -21,10 +24,36 @@ const getMeProducts = catchAsync(async (req, res, next) => {
 		include: [
 			{
 				model: Product, 
+				
+				include: [
+					{
+						model: ProductImg,
+						attributes: ["id", "imgUrl"],
+						
+					}
+				]
+
 			},
 		],
 		
 	});
+	
+	const newpro= user.products.map(async product => {
+
+        if (product.productImgs.length > 0) {
+            const productImgsPromises = product.productImgs.map(async (productImg) => {
+				const imgRef = ref(storage, productImg.imgUrl);
+
+				const imgFullPath = await getDownloadURL(imgRef);
+
+				productImg.imgUrl = imgFullPath;
+		    });
+		await Promise.all(productImgsPromises);
+        }
+		
+	});
+	await Promise.all(newpro);
+
 
 	res.status(200).json({
 		status: 'success',

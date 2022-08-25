@@ -3,9 +3,8 @@ import { Button, Card, Col, InputGroup, ListGroup, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const ProductCard = ({addToCard }) => {
+const ProductCard = ({addToCard , products}) => {
     const Navigate = useNavigate();
-    let products = useSelector(state => state.products);
 
     return (
         <ListGroup>
@@ -34,7 +33,7 @@ const ProductCard = ({addToCard }) => {
                                         />
                                     ) : (
                                         <Card.Img
-                                        src={product.productImgs?.[1].imgUrl}
+                                        src={product.productImgs?.[0].imgUrl}
                                         style={{
                                             width: "260px",
                                             height: "250px",

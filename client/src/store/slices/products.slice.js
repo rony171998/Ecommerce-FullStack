@@ -100,6 +100,8 @@ const getConfig = () => ({
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
 });
 
+
+
 export const getCarts = () => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.get("/cart", getConfig())
@@ -108,24 +110,28 @@ export const getCarts = () => (dispatch) => {
 }
 
 export const postCart = (data) => (dispatch) => {
+    
     dispatch(setIsLoading(true));
     return axios.post("/purchase", data, getConfig())
         .then((res) => dispatch(alert(res.data.status)))
         .finally(() => dispatch(setIsLoading(false)));
 }
 
-export const postProduct = (data) => (dispatch) => {
+export const  postProduct =async (formData) =>  (dispatch) => {   
     dispatch(setIsLoading(true));
-    return axios.post("/products", data, getConfig())
+    return axios.post ("/products", formData, getConfig())
         .then((res) => dispatch(alert(res.data.status)))
         .catch((err) => dispatch(console.log(err)))
         .finally(() => dispatch(setIsLoading(false)));
 }
-export const postCategory = (data) => (dispatch) => {
+export const deleteProduct = (id) => async (dispatch) => {
     dispatch(setIsLoading(true));
-    return axios.post("/products/categories", data, getConfig())
+    return axios.delete(`/products/${id}`, getConfig())
         .then((res) => dispatch(alert(res.data.status)))
         .catch((err) => dispatch(console.log(err)))
-        .finally(() => dispatch(setIsLoading(false)));
+        .finally(() => dispatch(setIsLoading(false)))
+        .finally(() => dispatch(getMyProducts()));
 }
+
+
 export default productsSlice.reducer;

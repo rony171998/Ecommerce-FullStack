@@ -34,6 +34,7 @@ const createUserValidators = [
 ];
 
 const createProductValidators = [
+	
 	body('title').notEmpty().withMessage('Title cannot be empty'),
 	body('description').notEmpty().withMessage('Description cannot be empty'),
 	body('quantity')
@@ -50,7 +51,7 @@ const createProductValidators = [
 		.withMessage('Price must be a number')
 		.isFloat({ gt: 0 })
 		.withMessage('Price must be greater than 0'),
-	body("categoryId").notEmpty().withMessage('Category cannot be empty'),
+	body("categoryId").notEmpty().withMessage('categoryId cannot be empty'),
 	checkResult,
 	
 ]

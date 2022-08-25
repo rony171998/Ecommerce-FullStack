@@ -29,6 +29,7 @@ const ProductDetail = () => {
         setProduct(
             products.find(productsItem => productsItem.id === Number(id))
         );
+        setValue(0)
     }, [products, id]);
 
     const subtractQuantitiesProduc = () => {
@@ -66,36 +67,28 @@ const ProductDetail = () => {
                                     objectFit: "contain",
                                 }}
                             ></Card.Img>
-                            <ToggleButtonGroup
+                            {product.productImgs?.length > 1 && (
+
+                                <ToggleButtonGroup
                                 className="mt-1"
                                 type="checkbox"
                                 value={value}
                             >
-                                <ToggleButton
-                                    id="toggle-check"
-                                    onClick={() => setValue(0)}
-                                    type="checkbox"
-                                    value={1}
-                                >
-                                    Photo 1
-                                </ToggleButton>
-                                <ToggleButton
-                                    id="toggle-check"
-                                    onClick={() => setValue(1)}
-                                    type="checkbox"
-                                    value={2}
-                                >
-                                    Photo 2
-                                </ToggleButton>
-                                <ToggleButton
-                                    id="toggle-check"
-                                    onClick={() => setValue(2)}
-                                    type="checkbox"
-                                    value={3}
-                                >
-                                    Photo 3
-                                </ToggleButton>
+                                {product.productImgs?.map((productImg, index) => (
+                                    <ToggleButton
+                                        key={index}
+                                        value={index}
+                                        onClick={() => setValue(index)}
+                                        type="checkbox"
+                                        
+                                    >
+                                        Photo {index + 1}
+                                    </ToggleButton>
+                                ))}
+                                
                             </ToggleButtonGroup>
+                            )}
+                            
                         </>
                     )}
                 </Card>

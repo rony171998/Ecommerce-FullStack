@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 const SimilarProducts = ({products}) => {
     const navigate = useNavigate();
     
+    
+    
     return (
         <Card>
             <Row>
@@ -36,7 +38,7 @@ const SimilarProducts = ({products}) => {
                                         />
                                     ) : (
                                         <Card.Img
-                                        src={product.productImgs?.[1].imgUrl}
+                                        src={product.productImgs?.[0].imgUrl}
                                         style={{
                                             width: "260px",
                                             height: "250px",

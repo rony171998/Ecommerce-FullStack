@@ -73,6 +73,7 @@ const News = () => {
                                             <Card.Text>
                                                 {newsItem.lead}
                                             </Card.Text>
+                                            
                                         </Card.Body>
                                         <Card.Footer className="text-muted">{newsItem.date}</Card.Footer>
                                     </Card>
