@@ -1,12 +1,13 @@
 export { default as Home } from "./Home";
 export { default as Login } from "./Login";
-export { default as NewsDetail } from "./NewsDetail";
 export { default as Product } from "./Product";
+export { default as Products } from "./Products";
 export { default as SignIn } from "./SignIn";
 export { default as Purchases } from "./Purchases";
 export { default as Cart } from "./Cart";
 export { default as PurchaseData } from "./PurchaseData";
-export { default as News } from "./News";
 export { default as User } from "./User";
 export { default as AddProduct } from "./AddProduct";
 export { default as AddCategory } from "./AddCategory";
+export { default as Category } from "./Category";
+export { default as Search } from "./Search";

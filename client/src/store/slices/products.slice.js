@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setIsLoading } from './isLoading.slice';
+import { getMyProducts } from './user.slice';
 
 if (process.env.NODE_ENV === 'development') {
     axios.defaults.baseURL = 'http://localhost:4000/api/v1';
 } else {
     axios.defaults.baseURL = 'https://ecommerce-express.azurewebsites.net/api/v1';  
 }
-
 
 export const productsSlice = createSlice({
     
@@ -28,36 +28,6 @@ export const getProducts = () => (dispatch) => {
         .then(res =>dispatch(setProducts(res.data.products)))
         .finally(() => dispatch(setIsLoading(false)));
 }
-
-export const getMyProducts = () => (dispatch) => {
-    dispatch(setIsLoading(true));
-    
-    return axios.get(`/users/me` , getConfig())
-        .then(res =>dispatch(setProducts(res.data.user)))
-        .finally(() => dispatch(setIsLoading(false)));
-}
-
-export const addProductsToCart = (id,quantity) => (dispatch) => {
-    const data = {id, quantity}
-    dispatch(setIsLoading(true));
-    return axios.post("/cart" , data, getConfig())
-        .then((res) => dispatch(alert(res.data.status)))
-        .finally(() => dispatch(setIsLoading(false)));
-}
-export const pachProductsToCart = (id,quantity) => (dispatch) => {
-    const data = {id, newQuantity: quantity}
-    dispatch(setIsLoading(true));
-    return axios.patch("/cart" , data, getConfig())
-        .then((res) => dispatch(alert(res.data.status)))
-        .finally(() => dispatch(setIsLoading(false)));
-}
-export const DelProductsToCart = (id) => (dispatch) => {
-    dispatch(setIsLoading(true));
-    return axios.delete(`/cart/${id}` , getConfig())
-        .then((res) => dispatch(alert(res.data.status)))
-        .finally(() => dispatch(setIsLoading(false)));
-}
-
 
 export const filterCategory = (id) => (dispatch) => {
     dispatch(setIsLoading(true));
@@ -100,24 +70,7 @@ const getConfig = () => ({
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
 });
 
-
-
-export const getCarts = () => (dispatch) => {
-    dispatch(setIsLoading(true));
-    return axios.get("/cart", getConfig())
-        .then((res) => dispatch(setProducts(res.data.data)))
-        .finally(() => dispatch(setIsLoading(false)));
-}
-
-export const postCart = (data) => (dispatch) => {
-    
-    dispatch(setIsLoading(true));
-    return axios.post("/purchase", data, getConfig())
-        .then((res) => dispatch(alert(res.data.status)))
-        .finally(() => dispatch(setIsLoading(false)));
-}
-
-export const  postProduct =async (formData) =>  (dispatch) => {   
+export const  postProduct = (formData) =>  (dispatch) => {   
     dispatch(setIsLoading(true));
     return axios.post ("/products", formData, getConfig())
         .then((res) => dispatch(alert(res.data.status)))

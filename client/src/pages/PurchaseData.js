@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form, ListGroup } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { useDispatch } from 'react-redux';
-import { postCart } from '../store/slices/products.slice';
+import { postCart } from '../store/slices/purchases.slice';
 
 const PurchaseData = () => {
 

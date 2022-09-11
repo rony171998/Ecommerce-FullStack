@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyProducts } from "../store/slices/products.slice";
+import { getMyProducts } from "../store/slices/user.slice";
 import { LoadingScreen, UserProducts } from "../components";
 
 const User = () => {
@@ -24,7 +24,7 @@ const User = () => {
         
     }, [dispatch]);
     
-    let user = useSelector(state => state.products);
+    let user = useSelector(state => state.user);
     
     return (
         <>

@@ -1,24 +1,25 @@
 import React, { useEffect } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getCategories } from "../store/slices/category.slice";
+import { filterCategory } from "../store/slices/products.slice";
 
-const Categories = ({setProducts , product}) => {
-    let categories = useSelector(state => state.category);   
+const Categories = () => {
+     
     const dispatch = useDispatch();
-    const isLoading = useSelector((state) => state.isLoading);
+    const navigate = useNavigate();
 
     useEffect(() => {
             
         dispatch(getCategories())
         
     }, [dispatch]);
+    
+    let categories = useSelector(state => state.category);  
 
-    const selectCategory = id => {
-        setProducts(product.filter(product => product.category.id === id));
-    };
     return (
-        <ListGroup className="mb-3 mt-3">
+        <ListGroup className="mb-3">
             <Card.Header className="bg-primary">
                 <Card.Title className="text-white">Categories</Card.Title>
             </Card.Header>
@@ -26,7 +27,7 @@ const Categories = ({setProducts , product}) => {
                 <ListGroup.Item
                     action
                     key={category.id}
-                    onClick={() => selectCategory(category.id)}
+                    onClick={() => navigate(`/category/${category.id}`)}
                 >
                     {category.name}
                 </ListGroup.Item>

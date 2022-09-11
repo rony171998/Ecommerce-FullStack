@@ -8,3 +8,10 @@ export {default as ProductCard} from "./ProductCard";
 export {default as ProductDetail} from "./ProductDetail";
 export {default as UserProducts} from "./UserProducts";
 export {default as ListCategories} from "./ListCategories";
+export {default as Paginations } from "./Paginations";
+export {default as Slider} from "./Slider";
+export {default as SearchBar} from "./SearchBar";
+export {default as RangePrice} from "./RangePrice";
+export {default as ProductInHome} from "./ProductInHome";
+export {default as Emptyproduct} from "./Emptyproduct";
+

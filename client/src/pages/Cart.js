@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useDispatch , useSelector } from "react-redux";
-import { DelProductsToCart ,getCarts } from "../store/slices/products.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { getCarts, DelProductsToCart } from "../store/slices/cart.slice";
 
 const Cart = () => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -13,68 +12,62 @@ const Cart = () => {
         dispatch(getCarts());
     }, [dispatch]);
 
-    const removeItem = (id) => {
+    const removeItem = id => {
         dispatch(DelProductsToCart(id));
         dispatch(getCarts());
-    }
-    let cart = useSelector(state => state.products);
+    };
+    let cart = useSelector(state => state.cart);
 
     console.log(cart);
-    
+
     return (
-        <div>
-            <Card className="mt-3">
-                <Card.Header>
-                    <Card.Title>Cart</Card.Title>
-                </Card.Header>
-            </Card>
-            
-            {
-                Object.entries(cart).length === 0 ?
-                    <h1>Not Fount Producs</h1>
-                    :
-                    <table className="table table-hover">
+        <Card className="mt-3">
+            <Card.Header>
+                <Card.Title>Cart</Card.Title>
+            </Card.Header>
+            <Card.Body>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Sub Total</th>
+                        </tr>
+                    </thead>
 
-                <thead>
+                    <tbody>
+                        {cart.productsinCarts?.map((cartItem ,index) => (
+                            <tr className="table-light " key={cartItem.id}>
+                                <td>{index+1}</td>
+                                <td>{cartItem.product.title}</td>
+                                <td>{cartItem.product.quantity}</td>
+                                <td>$ {cartItem.product.price}</td>
+                                <td>
+                                    $ {cartItem.product.quantity * cartItem.product.price}
+                                </td>
 
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Sub Price</th>
-                    </tr>
-
-                </thead>
-
-                <tr >
-                    {
-                        cart.map((cartItem) => (
-
-                            <tr className="table-light " key={cartItem.id} >
-
-                                <td >{cartItem.title}</td>
-                                <td >{cartItem.quantity}</td>
-                                <td>$ {cartItem.price}</td>
-                                <td>$ {cartItem.quantity * cartItem.price}.00</td>
-                                
-                                
-                                <Button variant="" onClick={() => removeItem(cartItem.id)}>Delete</Button>
-
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => removeItem(cartItem.id)}
+                                >
+                                    Delete
+                                </Button>
                             </tr>
+                        ))}
+                    </tbody>
 
-                        ))
+                    <Button onClick={() => navigate("/cart/formdata")}>
+                        Chekout
+                    </Button>
+                </Table>
+            </Card.Body>
 
-                    }
-
-
-                </tr>
-
-                <Button onClick={() => navigate("/cart/formdata")}>Chekout</Button>
-            </table>
-            }
-
-
-        </div >
+            
+                
+            
+        </Card>
     );
 };
 

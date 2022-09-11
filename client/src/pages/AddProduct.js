@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { postProduct } from "../store/slices/products.slice";
-import { AlertSuccess , AlertError } from "../components/Alerts";
+import { AlertSuccess } from "../components/Alerts";
 
 const AddProduct = () => {
     const { register, handleSubmit } = useForm();
@@ -27,21 +27,20 @@ const AddProduct = () => {
         for (let value of data.productImg) {
             formData.append("productImg", value);
         }
-        console.log(data);
-        setShow(true);
-        
-        //dispatch(postProduct(formData));
+
+        setShow(true);   
+        dispatch(postProduct(formData));
     };
     return (
         <div>
-            <Card style={{ maxWidth: "500px" }} className="mx-auto mt-5">
-                <Card.Header>
+            <Card style={{ maxWidth: "500px" }} className="mx-auto mt-5 text-center">
+                <Card.Header className="">
                     <Card.Title>Add Product</Card.Title>
                 </Card.Header>
                 <Card.Body>
                     <Form onSubmit={handleSubmit(submit)}>
                         <Form.Group className="mb-3" controlId="formBasictitle">
-                            <Form.Label>Name Product</Form.Label>
+                            
                             <Form.Control
                                 {...register("title")}
                                 type="text"
@@ -53,28 +52,39 @@ const AddProduct = () => {
                             className="mb-3"
                             controlId="formBasicdescription"
                         >
-                            <Form.Label>Description</Form.Label>
+                            
                             <Form.Control
                                 {...register("description")}
-                                type="text"
-                                placeholder="Enter Description"
+                                as="textarea"
+                                rows={4}
+                                placeholder="Description"
                                 required
+                                maxLength="250"
+                                
                             />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicprice">
-                            <Form.Label>Price</Form.Label>
+                       
+                        <Form.Group className="mb-3" controlId="formBasicprice"> 
+                          
+                        <InputGroup className="mb-3">
+                            
+                            <InputGroup.Text>USD $</InputGroup.Text>
+                            
                             <Form.Control
                                 {...register("price")}
                                 type="number"
                                 placeholder="Price"
                                 required
                             />
+                            
+                        </InputGroup>  
                         </Form.Group>
+                        
                         <Form.Group
                             className="mb-3"
                             controlId="formBasicquantity"
                         >
-                            <Form.Label>Quantity</Form.Label>
+                            
                             <Form.Control
                                 {...register("quantity")}
                                 type="number"
@@ -87,8 +97,9 @@ const AddProduct = () => {
                             className="mb-3"
                             controlId="formBasiccategoryId"
                         >
-                            <Form.Label>Category</Form.Label>
+                            
                             <Form.Select {...register("categoryId")} required>
+                                <option value="">Select Category</option>
                                 {categories.categories?.map(category => (
                                     <option
                                         key={category.id}
@@ -114,10 +125,10 @@ const AddProduct = () => {
                             />
                         </Form.Group>
 
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" className="text-center">
                             Add
                         </Button>
-                        <AlertError show={show} setShow={setShow} />
+                        <AlertSuccess show={show} setShow={setShow} />
                     </Form>
                 </Card.Body>
             </Card>

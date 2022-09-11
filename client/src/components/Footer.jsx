@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div className="card text-white bg-primary mt-5">
+        <div className="card text-white bg-primary mt-5 text-center">
             <div className='container'>
                 <div className="row">
                     <div className="col">
@@ -21,8 +21,8 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    <div className="col">
-                        <div className="card-body ">
+                    <div className="col ">
+                        <div className="card-body  ">
                             <h4 className="card-header text-black bg-secondary mb-3 ">Products</h4>
                             <a className="card-link" href="https://e-commerce-rony.netlify.app/" target="_blank" rel="noopener noreferrer">
                                 <p className="card-text text-white">E-commerce App</p>
@@ -40,9 +40,9 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="col">
-                        <div className="card-body">
+                        <div className="card-body ">
                             <h4 className="card-header text-black bg-secondary mb-3">Social</h4>
-                            <div className="col">
+                            <div className="col ">
                                 <a href="https://www.linkedin.com/in/rony-puche-a80275234/" target="_blank" rel="noopener noreferrer">
                                     <img className="card-img mt-2" style={{ width: "25%" }} src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" />
                                 </a>
@@ -63,7 +63,7 @@ const Footer = () => {
                 </div>
 
                 <div >
-                    <h4 className="card-title mt-5  text-white" style={{ textAlign: "center" }}>Rony Puche web &copy; 2022</h4>
+                    <h4 className="card-title  text-white" style={{ textAlign: "center" }}>Rony Puche web &copy; 2022</h4>
                 </div>
 
             </div>

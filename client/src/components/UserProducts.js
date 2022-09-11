@@ -54,7 +54,7 @@ const UserProducts = ({ userproducts }) => {
                 {userproducts === undefined ? (
                     <Card.Text>Not products</Card.Text>
                 ) : (
-                    <Row>
+                    <Row md={3}>
                         {products?.map(product => (
                             <Col key={product.id}>
                                 {isLoading ? (

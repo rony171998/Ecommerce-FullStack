@@ -1,4 +1,5 @@
 const { Category } = require('../models/category.model');
+const { Product } = require('../models/product.model');
 
 const {catchAsync} = require('../utils/catchAsync.util');
 
@@ -6,6 +7,9 @@ const {catchAsync} = require('../utils/catchAsync.util');
 const getAllCategories = catchAsync(async (req, res, next) => {
 	const categories = await Category.findAll({ 
 		where: { status: 'active' },
+		include: {
+			model: Product,
+		}
 	});
 
 	res.status(200).json({
@@ -16,7 +20,7 @@ const getAllCategories = catchAsync(async (req, res, next) => {
 
 const postCategories = catchAsync(async (req, res, next) => {
 	const { name } = req.body;
-	console.log("llegue a postCategories");
+	
 	const newCategory = await Category.create({
 		name,
 	});
