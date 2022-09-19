@@ -12,17 +12,21 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14'
+    versionSpec: '14.x'
   displayName: 'Install Node.js'
 
 - script: |
     npm install
-  
-  displayName: 'installing dependencies'
-
-- script: |
     npm run build
-  displayName: 'npm build'
+  displayName: 'npm instal'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
 
 - task: AzureWebApp@1
   inputs:
