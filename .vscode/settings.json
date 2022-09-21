@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/3a800ef8-42e2-4303-8da7-714b2ff0a984/microsoft.web/sites/subscriptions/3a800ef8-42e2-4303-8da7-714b2ff0a984/resourceGroups/rg-ecomerce-express/providers/Microsoft.Web/sites/ecommerce-express",
+    "appService.deploySubpath": "."
+}

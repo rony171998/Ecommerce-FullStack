@@ -26,6 +26,7 @@ export const getProducts = () => (dispatch) => {
     
     return axios.get(`/products`)
         .then(res =>dispatch(setProducts(res.data.products)))
+        .catch(err => console.log(err))
         .finally(() => dispatch(setIsLoading(false)));
 }
 

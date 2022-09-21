@@ -14,8 +14,8 @@
 		"start:server": "npm run start:dev --prefix server",
 		"start:app": "npm-run-all --parallel start:server start:client",
 		"build:client": "npm run build --prefix client",
-		"start": "npm start --prefix server",
-		"heroku-postbuild": "npm-run-all install:app build:client"
+		"start": "npm start --prefix server"
+		
 	},
 	"keywords": [],
 	"author": "",
