@@ -35,7 +35,7 @@ const ProductDetail = () => {
             );
         }
 
-    }, [productId , dispatch]);
+    }, [dispatch, productId, products]);
 
     const subtractQuantitiesProduc = () => {
         if (quantitiesproduct > 1) {

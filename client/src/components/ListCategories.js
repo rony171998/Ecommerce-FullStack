@@ -3,7 +3,6 @@ import { Card, ListGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "../store/slices/category.slice";
-import { filterCategory } from "../store/slices/products.slice";
 
 const Categories = () => {
      

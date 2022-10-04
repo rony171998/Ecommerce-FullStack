@@ -21,7 +21,7 @@ const Search = () => {
                 )
             );
         }
-    }, [search , dispatch]);
+    }, [dispatch , products , search]);
 
     return (
         <div>

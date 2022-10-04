@@ -22,7 +22,7 @@ const Category = () => {
             setProduct(products.filter(productsItem => productsItem.categoryId === Number(CategoryId)));
         }
             
-    }, [CategoryId , dispatch]);
+    }, [dispatch , products , CategoryId]);
     
     return (
         <div>

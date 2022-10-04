@@ -26,14 +26,14 @@ const SimilarProducts = ({ products }) => {
                 )
             );
         }
-    }, [productId , dispatch]);
+    }, [dispatch , productId , products]);
 
     return (
         <Row md={4}>
             {product.length &&
                 product?.map(
                     (product, index) =>
-                        product.id != productId &&
+                        //product.id != productId &&
                         index < 4 &&
                         index >= 0 && (
                             <Col key={product.id}>
