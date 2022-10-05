@@ -17,7 +17,13 @@ const Home = () => {
             <Slider />
 
             <Row className="my-3">
-                <Col>{isLoading ? <LoadingScreen /> : <ProductInHome />}</Col>
+                <Col>
+                    {
+                        isLoading ? <LoadingScreen /> 
+                        : 
+                        <ProductInHome />
+                    }
+                </Col>
             </Row>
         </div>
     );

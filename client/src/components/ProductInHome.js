@@ -19,16 +19,16 @@ const ProductInHome = () => {
                     <Col>
                         <Card
                             style={{ cursor: "pointer" }}
-                            onClick={() => navigate(`/category/${categories.categories[1].id}`)}
+                            onClick={() => navigate(`/category/${categories.categories[1]?.id}`)}
                         >
                             <Card.Header>
-                                {categories.categories?.[1].name}
+                                {categories.categories?.[1]?.name}
                             </Card.Header>
                             <Carousel controls="false">
                                 {products?.map(
                                     (product, index) =>
                                         product.categoryId ===
-                                            categories.categories[1].id && (
+                                            categories.categories[1]?.id && (
                                             <Carousel.Item key={index}>
                                                 <Card>
                                                     <Card.Header>
@@ -48,7 +48,7 @@ const ProductInHome = () => {
                                                     
                                                     <Card.Body>
                                                         <Card.Title>
-                                                            {product.name}
+                                                            {product?.name}
                                                         </Card.Title>
                                                         <Card.Text>
                                                             {
@@ -73,16 +73,16 @@ const ProductInHome = () => {
                     <Col>
                     <Card
                             style={{ cursor: "pointer" }}
-                            onClick={() => navigate(`/category/${categories.categories[0].id}`)}
+                            onClick={() => navigate(`/category/${categories.categories[0]?.id}`)}
                         >
                             <Card.Header>
-                                {categories.categories?.[0].name}
+                                {categories.categories?.[0]?.name}
                             </Card.Header>
                             <Carousel>
                                 {products?.map(
                                     (product, index) =>
                                         product.categoryId ===
-                                            categories.categories[0].id && (
+                                            categories.categories[0]?.id && (
                                             <Carousel.Item key={index}>
                                                 <Card>
                                                     <Card.Header>
@@ -101,7 +101,7 @@ const ProductInHome = () => {
                                                     />
                                                     <Card.Body>
                                                         <Card.Title>
-                                                            {product.name}
+                                                            {product?.name}
                                                         </Card.Title>
                                                         <Card.Text>
                                                             {
@@ -125,16 +125,16 @@ const ProductInHome = () => {
                     <Col>
                     <Card
                             style={{ cursor: "pointer" }}
-                            onClick={() => navigate(`/category/${categories.categories[2].id}`)}
+                            onClick={() => navigate(`/category/${categories.categories[2]?.id}`)}
                         >
                             <Card.Header>
-                                {categories.categories?.[2].name}
+                                {categories.categories?.[2]?.name}
                             </Card.Header>
                             <Carousel>
                                 {products?.map(
                                     (product, index) =>
                                         product.categoryId ===
-                                            categories.categories[2].id && (
+                                            categories.categories[2]?.id && (
                                             <Carousel.Item key={index}>
                                                 <Card>
                                                     <Card.Header>
@@ -153,7 +153,7 @@ const ProductInHome = () => {
                                                     />
                                                     <Card.Body>
                                                         <Card.Title>
-                                                            {product.name}
+                                                            {product?.name}
                                                         </Card.Title>
                                                         <Card.Text>
                                                             {
@@ -177,16 +177,16 @@ const ProductInHome = () => {
                     <Col>
                     <Card
                             style={{ cursor: "pointer" }}
-                            onClick={() => navigate(`/category/${categories.categories[3].id}`)}
+                            onClick={() => navigate(`/category/${categories.categories[3]?.id}`)}
                         >
                             <Card.Header>
-                                {categories.categories?.[3].name}
+                                {categories.categories?.[3]?.name}
                             </Card.Header>
                             <Carousel>
                                 {products?.map(
                                     (product, index) =>
                                         product.categoryId ===
-                                            categories.categories[3].id && (
+                                            categories.categories[3]?.id && (
                                             <Carousel.Item key={index}>
                                                 <Card>
                                                     <Card.Header>
