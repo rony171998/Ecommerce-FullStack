@@ -11,3 +11,4 @@ export { default as AddProduct } from "./AddProduct";
 export { default as AddCategory } from "./AddCategory";
 export { default as Category } from "./Category";
 export { default as Search } from "./Search";
+export { default as P404 } from "./P404";

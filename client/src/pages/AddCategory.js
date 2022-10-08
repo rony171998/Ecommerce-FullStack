@@ -17,7 +17,6 @@ const AddProduct = () => {
             <Row>
                 <Col sm="3" className="mt-3">
                     <ListCategories />
-
                     <Weather />
                 </Col>
                 <Col sm="8">

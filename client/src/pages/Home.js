@@ -11,6 +11,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch]);
+
     
     return (
         <div>
@@ -19,9 +20,7 @@ const Home = () => {
             <Row className="my-3">
                 <Col>
                     {
-                        isLoading ? <LoadingScreen /> 
-                        : 
-                        <ProductInHome />
+                        isLoading ? <LoadingScreen /> : <ProductInHome />
                     }
                 </Col>
             </Row>

@@ -12,6 +12,7 @@ import {
     AddCategory,
     Category,
     Search,
+    P404,
 } from "./pages";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -53,6 +54,7 @@ function App() {
                             element={<PurchaseData />}
                         />
                         <Route path="/user" element={<User />} />
+                        <Route path="*" element={<P404 />} />
                     </Route>
                 </Routes>
             </Container>
