@@ -6,8 +6,8 @@ import Emptyproduct from "./Emptyproduct";
 const ProductCard = ({ products }) => {
     const Navigate = useNavigate();
     const page = useParams().page;
-    const numberinpage = 12;  
-    
+    const numberinpage = 12;
+
     return (
         <ListGroup>
             <Row md={3}>
@@ -16,8 +16,12 @@ const ProductCard = ({ products }) => {
                 ) : (
                     products?.map(
                         (product, index) =>
-                            index < (numberinpage * (page === undefined ? 1 : page)) &&
-                            index >= (numberinpage * (page === undefined ? 1 : page))-numberinpage && (
+                            index <
+                                numberinpage *
+                                    (page === undefined ? 1 : page) &&
+                            index >=
+                                numberinpage * (page === undefined ? 1 : page) -
+                                    numberinpage && (
                                 <Col key={product.id}>
                                     <Card
                                         style={{ cursor: "pointer" }}
@@ -31,29 +35,18 @@ const ProductCard = ({ products }) => {
                                             </Card.Title>
                                         </Card.Header>
                                         <Card.Body>
-                                            {product?.productImgs[0] ===
-                                            undefined ? (
-                                                <Card.Img
-                                                    src="./no photo.jfif"
-                                                    style={{
-                                                        width: "260px",
-                                                        height: "250px",
-                                                        objectFit: "contain",
-                                                    }}
-                                                />
-                                            ) : (
-                                                <Card.Img
-                                                    src={
-                                                        product.productImgs?.[0]
-                                                            .imgUrl
-                                                    }
-                                                    style={{
-                                                        width: "260px",
-                                                        height: "250px",
-                                                        objectFit: "contain",
-                                                    }}
-                                                />
-                                            )}
+                                            <Card.Img
+                                                src={
+                                                    product.productImgs?.[0]
+                                                        .imgUrl ??
+                                                    "./no photo.jfif"
+                                                }
+                                                style={{
+                                                    width: "content",
+                                                    height: "250px",
+                                                    objectFit: "contain",
+                                                }}
+                                            />
                                         </Card.Body>
                                         <Card.Footer>
                                             $ {product.price} USD

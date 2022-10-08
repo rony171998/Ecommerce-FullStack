@@ -15,15 +15,17 @@ const ProductInHome = () => {
             {products.length === 0 || categories.length === 0 ? (
                 <Emptyproduct />
             ) : (
-                <Row md="2">
-                    {categories.categories?.map(category => (
-                        <Col key={category.id}>
+                <Row md={2}>
+                    {categories.categories?.map((category , index) => 
+                        index < 4 && (
+                    
+                        <Col key={category.id} >
                             <Card className="my-3" style={{ cursor:"pointer"}}>
                                 <Card.Header>
                                     <h4>{category.name}</h4>
                                 </Card.Header>
                                 <Card.Body>
-                                    <Carousel>
+                                    <Carousel controls="true">
                                         {products
                                             .filter(
                                                 product =>
@@ -39,19 +41,20 @@ const ProductInHome = () => {
                                                         )
                                                     }
                                                 >
-                                                    <img
-                                                        className="d-block w-100"
-                                                        src={product.productImgs[1]
+                                                    <Card.Img
+                                                        className="d-block w-100 img-fluid"
+                                                        src={product.productImgs[0]
                                                             ?.imgUrl ?? "./no photo.jfif"}
                                                         alt={product.title}
+                                                        style={{
+                                                            width: "content",
+                                                            height: "25em",
+                                                            objectFit: "contain",
+                                                        }}
                                                     />
                                                     <Carousel.Caption>
                                                         <h3>{product.title}</h3>
-                                                        <p>
-                                                            {
-                                                                product.description
-                                                            }
-                                                        </p>
+                                                        
                                                     </Carousel.Caption>
                                                 </Carousel.Item>
                                             ))}

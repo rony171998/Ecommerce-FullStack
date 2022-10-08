@@ -9,7 +9,11 @@ const SearchBar = () => {
     const { handleSubmit } = useForm();
 
     const submit = () => {
-        navigate(`/search/${search}`);
+        if (search === "") {
+            navigate(`/search/${"all"}`);
+        }else{
+            navigate(`/search/${search}`);
+        }
     };
 
     return (

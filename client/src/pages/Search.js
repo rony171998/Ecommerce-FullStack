@@ -23,14 +23,20 @@ const Search = () => {
         }
     }, [dispatch , products , search]);
 
+    
     return (
-        <div>
-            {product.length === 0 ? (
+        <div className="my-3">
+            {product.length === 0 && search !== "all" ? (
                 <Emptyproduct />
                 
             ) : (
                 <ProductCard products={product} />
             )}
+
+            {
+                search === "all" && <ProductCard products={products} />
+            }          
+            
         </div>
     );
 };
