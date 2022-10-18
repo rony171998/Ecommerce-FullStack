@@ -20,7 +20,7 @@ const Home = () => {
             <Row className="my-3">
                 <Col>
                     {
-                        isLoading ? <ProductInHome /> : <Skeleton /> 
+                        isLoading ?  <Skeleton /> : <ProductInHome />  
                     }
                 </Col>
             </Row>
