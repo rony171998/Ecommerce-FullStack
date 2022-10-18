@@ -14,4 +14,5 @@ export {default as SearchBar} from "./SearchBar";
 export {default as RangePrice} from "./RangePrice";
 export {default as ProductInHome} from "./ProductInHome";
 export {default as Emptyproduct} from "./Emptyproduct";
+export {default as Skeleton} from "./Skeleton";
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../store/slices/products.slice";
-import { Slider, ProductInHome, LoadingScreen } from "../components";
+import { Slider, ProductInHome, LoadingScreen, Skeleton } from "../components";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Home = () => {
             <Row className="my-3">
                 <Col>
                     {
-                        isLoading ? <LoadingScreen /> : <ProductInHome />
+                        isLoading ? <ProductInHome /> : <Skeleton /> 
                     }
                 </Col>
             </Row>
