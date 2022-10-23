@@ -21,9 +21,9 @@ const {
 
 const cartRouter = express.Router();
 
-cartRouter.get('/', getAllproductsinCart);
-
 cartRouter.use(protectSession);
+
+cartRouter.get('/', getAllproductsinCart);
 
 cartRouter.get('/purchases', getPurchases);
 

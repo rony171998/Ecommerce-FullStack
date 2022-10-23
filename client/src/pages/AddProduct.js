@@ -2,21 +2,22 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { LoadingSwal } from "../components";
 import { postProduct } from "../store/slices/products.slice";
-import { AlertSuccess } from "../components/Alerts";
 
 const AddProduct = () => {
     const { register, handleSubmit } = useForm();
     const dispatch = useDispatch();
     const [categories, setCategories] = useState([]);
-    const [show, setShow] = useState(false);
+    const isLoading = useSelector(state => state.isLoading);
 
     useEffect(() => {
         axios.get("/products/categories").then(res => setCategories(res.data));
     }, [dispatch]);
 
-    const submit = data => {
+    const submit = (data , e) => {
+        e.preventDefault();
         let formData = new FormData();
         formData.append("title", data.title);
         formData.append("description", data.description);
@@ -27,9 +28,9 @@ const AddProduct = () => {
         for (let value of data.productImg) {
             formData.append("productImg", value);
         }
-
-        setShow(true);   
+        LoadingSwal(isLoading);
         dispatch(postProduct(formData));
+        
     };
     return (
         <div>
@@ -128,7 +129,7 @@ const AddProduct = () => {
                         <Button variant="primary" type="submit" className="text-center">
                             Add
                         </Button>
-                        <AlertSuccess show={show} setShow={setShow} />
+                        
                     </Form>
                 </Card.Body>
             </Card>

@@ -36,14 +36,14 @@ const ProductCard = ({ products }) => {
                                         </Card.Header>
                                         <Card.Body>
                                             <Card.Img
+                                                alt={"Image" + product.title}
                                                 src={
                                                     product.productImgs?.[0]
-                                                        .imgUrl ??
+                                                        ?.imgUrl ??
                                                     "./no photo.jfif"
                                                 }
                                                 style={{
-                                                    width: "content",
-                                                    height: "250px",
+                                                    height: "15rem",
                                                     objectFit: "contain",
                                                 }}
                                             />

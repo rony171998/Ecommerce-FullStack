@@ -4,7 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 const P404 = () => {
     return (
         <Card className='m-5'>
-            <div class="col-md-6 align-self-center m-5">
+            <div className="col-md-6 align-self-center m-5">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 800 600">
                     <g>
@@ -264,7 +264,7 @@ const P404 = () => {
                     How you got here is a mystery. But you can click the button below
                     to go back to the homepage.
                 </p>
-                <Button class="primary"  href="#/">HOME</Button>
+                <Button className="primary"  href="#/">HOME</Button>
             </div>
         </Card>
     );

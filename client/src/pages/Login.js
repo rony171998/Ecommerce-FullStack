@@ -1,80 +1,99 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/slices/user.slice";
+import { LoadingSwal } from "../components";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const validationSchema = 
+        Yup.object().shape({
+            email: Yup.string().email().required('El email es requerido'),
+            password: Yup.string()
+            .required('La contraseña es requerida')
+            .min(8, 'La contraseña debe tener al menos 8 caracteres')
+            .max(20, 'La contraseña debe tener maximo 20 caracteres'),
+        });
 
-  const { register, handleSubmit } = useForm();
-  const form = useRef();
+    const formOptions = { resolver: yupResolver(validationSchema) };
+    const { register, handleSubmit, formState } = useForm(formOptions);
+    const { errors } = formState;
+    const dispatch = useDispatch();
+    const isLoading = useSelector(state => state.isLoading);
+    const navigate = useNavigate();
 
+    const submit = data => {
+        LoadingSwal(isLoading);
+        dispatch(login(data));
+        const token = localStorage.getItem("token");
+        if (token) {
+        navigate("/");
+        }               
+    };
 
-  const submit = (data) => {
-    axios
-      .post("/users/login", data)
-      .then((res) => {
-        localStorage.setItem("token", res.data.token)
-        localStorage.setItem("user", data.email);
-        alert("Sesión iniciada correctamente");
-      })
-      .catch((error) => {
-        
-        if (error.response.status === 401 || error.response.status === 400) {
-          alert("Usuario o contraseña incorrectos");
-        }
-        if (error.response.status === 404) {
-          alert("No existe el usuario");
-        }
-      });
+    return (
+        <div>
+            <Card
+                style={{ maxWidth: "500px" }}
+                className="mx-auto mt-5  text-center"
+            >
+                <Card.Body>
+                    <h1>Login</h1>
+                    <Form onSubmit={handleSubmit(submit)}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Test data</Form.Label>
+                            <br />
+                            <Form.Label>Email: rony@gmail.com</Form.Label>
+                            <br />
+                            <Form.Label>Password: pass1234</Form.Label>
+                            <br />
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control
+                              className={`form-control ${
+                                errors.email ? "is-invalid" : ""
+                                }`}
+                                {...register("email")}
+                                type="email"
+                                placeholder="Enter email"                               
+                            />
+                            
+                            <div className="invalid-feedback">
+                                {errors.email?.message}
+                            </div>
+                        </Form.Group>
 
-  };
-
-  return (
-    <div>
-
-      <Card style={{ maxWidth: "500px" }} className="mx-auto mt-5">
-        <Card.Body>
-          <h1>Login
-          </h1>
-          <Form onSubmit={handleSubmit(submit)} ref={form}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Test data</Form.Label><br />
-              <Form.Label>Email: rony@gmail.com</Form.Label><br />
-              <Form.Label>Password: pass1234</Form.Label><br />
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                {...register("email")}
-                type="email"
-                placeholder="Enter email"
-                required
-              />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword" >
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                {...register("password")}
-                type="password"
-                placeholder="Password"
-                required
-                
-                
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Login
-            </Button><br />
-            <Form.Label>Don't have an account? </Form.Label>
-            <a href="#/signin"> Sign Up</a>
-          </Form>
-        </Card.Body>
-      </Card>
-    </div>
-  );
-
+                        <Form.Group
+                            className="mb-3"
+                            controlId="formBasicPassword"
+                        >
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                className={`form-control ${
+                                    errors.password ? "is-invalid" : ""
+                                }`}
+                                {...register("password")}
+                                type="password"
+                                placeholder="Contraseña"
+                                
+                            />
+                            <div className="invalid-feedback">
+                                {errors.password?.message}
+                            </div>
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Login
+                        </Button>
+                        <br />
+                        <Form.Label>Don't have an account? </Form.Label>
+                        <a href="#/signup"> Sign Up</a>
+                    </Form>
+                </Card.Body>
+            </Card>
+        </div>
+    );
 };
 
 export default Login;

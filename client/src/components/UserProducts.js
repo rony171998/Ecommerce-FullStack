@@ -4,6 +4,7 @@ import { Card, Row, Col, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteProduct } from "../store/slices/products.slice";
+import Emptyproduct from "./Emptyproduct";
 import LoadingScreen from "./LoadingScreen";
 
 const UserProducts = ({ userproducts }) => {
@@ -51,80 +52,75 @@ const UserProducts = ({ userproducts }) => {
                 </Form>
             </Card.Header>
             <Card.Body>
-                {userproducts === undefined ? (
-                    <Card.Text>Not products</Card.Text>
+                {isLoading ? (
+                    <LoadingScreen />
+                ) : products.length === 0 ? (
+                    <Emptyproduct />
                 ) : (
                     <Row md={3}>
                         {products?.map(product => (
                             <Col key={product.id}>
-                                {isLoading ? (
-                                    <LoadingScreen />
-                                ) : (
-                                    <Card>
-                                        <Card.Header>
-                                            <Card.Title>
-                                                {product.title}
-
-                                                {product.status ===
-                                                    "active" && (
-                                                    <Card.Img
-                                                        src="https://img.icons8.com/color/48/000000/delete-forever.png"
-                                                        style={{
-                                                            cursor: "pointer",
-                                                            float: "right",
-                                                            width: "2rem",
-                                                        }}
-                                                        onClick={() =>
-                                                            getDeleteProduct(
-                                                                product.id
-                                                            )
-                                                        }
-                                                    />
-                                                )}
-                                            </Card.Title>
-                                        </Card.Header>
-
-                                        <Card.Body
-                                            style={{ cursor: "pointer" }}
-                                            onClick={() =>
-                                                product.status === "active" &&
-                                                navigate(
-                                                    `/products/${product.id}`
-                                                )
-                                            }
-                                        >
-                                            {product.productImgs.length ===
-                                            0 ? (
+                                <Card>
+                                    <Card.Header>
+                                        <Card.Title>
+                                            {product.title}
+                                            
+                                            {product.status === "active" && (
                                                 <Card.Img
-                                                    src="./no photo.jfif"
+                                                    src="https://img.icons8.com/color/48/000000/delete-forever.png"
                                                     style={{
-                                                        width: "260px",
-                                                        height: "250px",
-                                                        objectFit: "contain",
+                                                        cursor: "pointer",
+                                                        float: "right",
+                                                        width: "2rem",
                                                     }}
-                                                />
-                                            ) : (
-                                                <Card.Img
-                                                    src={
-                                                        product.productImgs?.[0]
-                                                            ?.imgUrl
+                                                    onClick={() =>
+                                                        getDeleteProduct(
+                                                            product.id
+                                                        )
                                                     }
-                                                    style={{
-                                                        width: "260px",
-                                                        height: "250px",
-                                                        objectFit: "contain",
-                                                    }}
                                                 />
                                             )}
-                                        </Card.Body>
-                                        <Card.Footer>
-                                            <Card.Text>
-                                                Price ${product.price} USD{" "}
-                                                {product.status}
-                                            </Card.Text>
-                                        </Card.Footer>
-                                    </Card>
-                                )}
+                                            <Card.Img
+                                                src="https://img.icons8.com/color/48/000000/edit--v1.png"
+                                                style={{
+                                                    cursor: "pointer",
+                                                    float: "right",
+                                                    width: "2rem",
+                                                }}
+                                                onClick={() =>
+                                                    navigate("/addProduct")
+                                                }
+                                            />
+                                        </Card.Title>
+                                    </Card.Header>
+
+                                    <Card.Body
+                                        style={{ cursor: "pointer" }}
+                                        onClick={() =>
+                                            product.status === "active" &&
+                                            navigate(`/products/${product.id}`)
+                                        }
+                                    >
+                                        <Card.Img
+                                            alt={"Image" + product.title}
+                                            src={
+                                                product.productImgs?.[0]
+                                                    ?.imgUrl ??
+                                                "./no photo.jfif"
+                                            }
+                                            style={{
+                                                height: "15rem",
+                                                objectFit: "contain",
+                                            }}
+                                        />
+                                    </Card.Body>
+                                    <Card.Footer>
+                                        <Card.Text>
+                                            Price ${product.price} USD{" "}
+                                            {product.status}
+                                        </Card.Text>
+                                    </Card.Footer>
+                                </Card>
                             </Col>
                         ))}
                     </Row>

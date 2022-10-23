@@ -4,30 +4,30 @@ import React from "react";
 
 const Skeleton = () => {
     return (
-        <div class="ph-item ">
-            <div class="ph-col">
+        <div className="ph-item ">
+            <div className="ph-col">
                                 
-                <div class="ph-row">
-                    <div class="ph-col-4 big"></div>                   
+                <div className="ph-row">
+                    <div className="ph-col-4 big"></div>                   
                 </div>
-                <div class="ph-picture" style={{height:"25rem"}}></div>
-                <div class="ph-row">
-                    <div class="ph-col-4 big"></div>
+                <div className="ph-picture" style={{height:"25rem"}}></div>
+                <div className="ph-row">
+                    <div className="ph-col-4 big"></div>
                 </div>
-                <div class="ph-picture" style={{height:"25rem"}}></div>
+                <div className="ph-picture" style={{height:"25rem"}}></div>
                 
             </div>
-            <div class="ph-col">
+            <div className="ph-col">
                                 
-                <div class="ph-row">
-                    <div class="ph-col-4 big"></div>
+                <div className="ph-row">
+                    <div className="ph-col-4 big"></div>
                 </div>
-                <div class="ph-picture" style={{height:"25rem"}}></div>
+                <div className="ph-picture" style={{height:"25rem"}}></div>
 
-                <div class="ph-row">
-                    <div class="ph-col-4 big"></div>
+                <div className="ph-row">
+                    <div className="ph-col-4 big"></div>
                 </div>
-                <div class="ph-picture" style={{height:"25rem"}}></div>
+                <div className="ph-picture" style={{height:"25rem"}}></div>
             </div>
             
 

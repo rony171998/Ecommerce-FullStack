@@ -18,7 +18,7 @@ const Footer = () => {
                             <h4 className="card-header text-black bg-secondary mb-3">Curriculum</h4>
                             <a className="card-link" href="https://www.canva.com/design/DAFIIFIdRwA/iJ3xZc15-uhYUoMKxaTHKw/view?utm_content=DAFIIFIdRwA&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink"
                                 target="_blank" rel="noopener noreferrer">
-                                <img className="card-img" src="https://cdn-icons-png.flaticon.com/512/3135/3135731.png" alt="" style={{ width: "15%" }} />
+                                <img className="card-img" src="https://cdn-icons-png.flaticon.com/512/3135/3135731.png" alt="" style={{ width: "25%" }} />
                             </a>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setIsLoading } from './isLoading.slice';
+import { swal } from '../../components';
 
 export const categorySlice = createSlice({
     
@@ -20,16 +21,14 @@ const getConfig = () => ({
 
 export const getCategories = () => (dispatch) => {
     return axios.get(`/products/categories`)
-        .then(res =>dispatch(setCategories(res.data)))
-        
+        .then(res =>dispatch(setCategories(res.data)))    
 }
 
 export const postCategory = (data) => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.post("/products/categories", data, getConfig())
-        .then((res) => dispatch(alert(res.data.status)))
-        .catch((err) => dispatch(console.log(err)))
-        .finally(() => dispatch(setIsLoading(false)))
-              
+        .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
+        .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
+        .finally(() => dispatch(setIsLoading(false)));       
 }
 export default categorySlice.reducer;

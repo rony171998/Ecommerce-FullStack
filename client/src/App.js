@@ -1,6 +1,6 @@
 import {
     Home,
-    SignIn,
+    Signup,
     Login,
     Product,
     Products,
@@ -36,7 +36,7 @@ function App() {
                     />
 
                     <Route path="/login" element={<Login />} />
-                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signup" element={<Signup />} />
                     <Route path="/category/:categoryId" element={<Category />} />
                     <Route path="/category/:categoryId/page/:page" element={<Category />} />
                     <Route path="/search/:search" element={<Search />} />

@@ -42,13 +42,11 @@ const ProductInHome = () => {
                                                     }
                                                 >
                                                     <Card.Img
-                                                        className="d-block w-100 img-fluid"
                                                         src={product.productImgs[0]
                                                             ?.imgUrl ?? "./no photo.jfif"}
                                                         alt={product.title}
                                                         style={{
-                                                            width: "content",
-                                                            height: "25em",
+                                                            height: "25rem",
                                                             objectFit: "contain",
                                                         }}
                                                     />

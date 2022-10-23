@@ -2,16 +2,17 @@ import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../store/slices/products.slice";
-import { Slider, ProductInHome, Skeleton } from "../components";
+import { Slider, ProductInHome, Skeleton , LoadingSwal  } from "../components";
+
 
 const Home = () => {
-    const dispatch = useDispatch();
+    
     const isLoading = useSelector(state => state.isLoading);
-
+    const dispatch = useDispatch();
     useEffect(() => {
+        
         dispatch(getProducts());
     }, [dispatch]);
-
     
     return (
         <div>
@@ -20,7 +21,12 @@ const Home = () => {
             <Row className="my-3">
                 <Col>
                     {
-                        isLoading ?  <Skeleton /> : <ProductInHome />  
+                        isLoading ? 
+                        <>
+                            <LoadingSwal isLoading /> 
+                            <Skeleton /> 
+                        </> 
+                        : <ProductInHome />  
                     }
                 </Col>
             </Row>

@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 
 const Emptyproduct = () => {
     return (
-        <Card className="text-center">
+        <Card className="text-center border-light">
             <Card.Header>
                 <Card.Title>Sin Productos</Card.Title>
             </Card.Header>

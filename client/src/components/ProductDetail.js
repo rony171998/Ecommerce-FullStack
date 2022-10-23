@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductsToCart } from "../store/slices/cart.slice";
@@ -19,6 +19,7 @@ const ProductDetail = () => {
     const [quantitiesproduct, setQuantitiesProducts] = useState(1);
 
     const { handleSubmit } = useForm();
+    const form = useRef();
 
     const { productId } = useParams();
     let products = useSelector(state => state.products);
@@ -27,14 +28,15 @@ const ProductDetail = () => {
     useEffect(() => {
         if (products.length === 0) {
             dispatch(getProducts());
-        }           
-        
+        }
+        // filter product by id params (productId)
         if (products.length > 0) {
             setProduct(
-                products.find(productsItem => productsItem.id === Number(productId))
+                products.find(
+                    productsItem => productsItem.id === Number(productId)
+                )
             );
         }
-
     }, [dispatch, productId, products]);
 
     const subtractQuantitiesProduc = () => {
@@ -43,37 +45,50 @@ const ProductDetail = () => {
         }
     };
     const addQuantitiesProduc = () => {
-        setQuantitiesProducts(quantitiesproduct + 1);
+        if (quantitiesproduct < product.quantity) {
+            setQuantitiesProducts(quantitiesproduct + 1);
+        }
     };
 
     const submit = () => {
         dispatch(addProductsToCart(productId, quantitiesproduct));
     };
-
+    
     return (
         <Row>
             <Col sm="8">
                 <Card>
                     <Card.Body>
-                        {product.productImgs?.length === 0 ? (
-                            <Card.Img
-                                src="./no photo.jfif"                               
-                            />
-                        ) : (
-                            <Carousel variant="dark">
-                                {product.productImgs?.map(
+                        <Carousel variant="dark">
+                            {product.productImgs?.length === 0 ? (
+                                <Card.Img
+                                    style={{
+                                        height: "55vh",
+                                        objectFit: "contain",
+                                    }}
+                                    src={"./no photo.jfif"}
+                                    alt="no photo"
+                                />
+                            ) : (
+                                product?.productImgs?.map(
                                     (productImg, index) => (
                                         <Carousel.Item key={index}>
                                             <Card.Img
-                                                className="d-block w-500 h-500"
-                                                src={productImg.imgUrl}
+                                                style={{
+                                                    height: "55vh",
+                                                    objectFit: "contain",
+                                                }}
+                                                src={
+                                                    productImg?.imgUrl ??
+                                                    "/.no photo.jfif"
+                                                }
                                                 alt="First slide"
                                             />
                                         </Carousel.Item>
                                     )
-                                )}
-                            </Carousel>
-                        )}
+                                )
+                            )}
+                        </Carousel>
                     </Card.Body>
                 </Card>
             </Col>
@@ -92,7 +107,7 @@ const ProductDetail = () => {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <Form onSubmit={handleSubmit(submit)}>
+                        <Form onSubmit={handleSubmit(submit)} ref={form}>
                             <Form.Group controlId="formBasicQuantity">
                                 <InputGroup>
                                     <Button onClick={subtractQuantitiesProduc}>
@@ -106,6 +121,10 @@ const ProductDetail = () => {
                                     <Button onClick={addQuantitiesProduc}>
                                         +
                                     </Button>
+
+                                    <InputGroup.Text>
+                                        Stock : {product.quantity}
+                                    </InputGroup.Text>
                                 </InputGroup>
                                 <br />
                                 <InputGroup>
@@ -113,7 +132,7 @@ const ProductDetail = () => {
                                         $ {product.price} USD
                                     </InputGroup.Text>
 
-                                    <Button type="submit">Add Cart</Button>
+                                    <Button onClick={submit}>Add Cart</Button>
                                 </InputGroup>
                             </Form.Group>
                         </Form>

@@ -26,7 +26,7 @@ const SimilarProducts = ({ products }) => {
                 )
             );
         }
-    }, [dispatch , productId , products]);
+    }, [dispatch, productId, products]);
 
     return (
         <Row md={4}>
@@ -48,29 +48,18 @@ const SimilarProducts = ({ products }) => {
                                     </Card.Header>
 
                                     <Card.Body>
-                                        {product?.productImgs?.[0] ===
-                                        undefined ? (
-                                            <Card.Img
-                                                src="./no photo.jfif"
-                                                style={{
-                                                    width: "260px",
-                                                    height: "250px",
-                                                    objectFit: "contain",
-                                                }}
-                                            />
-                                        ) : (
-                                            <Card.Img
-                                                src={
-                                                    product.productImgs?.[0]
-                                                        .imgUrl
-                                                }
-                                                style={{
-                                                    width: "260px",
-                                                    height: "250px",
-                                                    objectFit: "contain",
-                                                }}
-                                            />
-                                        )}
+                                        <Card.Img
+                                            alt={"Image" + product.title}
+                                            src={
+                                                product.productImgs?.[0]
+                                                    ?.imgUrl ??
+                                                "./no photo.jfif"
+                                            }
+                                            style={{
+                                                height: "20vh",
+                                                objectFit: "contain",
+                                            }}
+                                        />
                                     </Card.Body>
                                     <Card.Footer>
                                         Price ${product.price} USD

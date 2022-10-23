@@ -52,7 +52,7 @@ const NavBar = () => {
                             <NavDropdown.Item href="#/login">
                                 Login
                             </NavDropdown.Item>
-                            <NavDropdown.Item href="#/signin">
+                            <NavDropdown.Item href="#/signup">
                                 Sign Up
                             </NavDropdown.Item>
                             <NavDropdown.Item href="#/addProduct">

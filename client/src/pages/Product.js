@@ -8,10 +8,8 @@ const Product = () => {
 
     return (
         <div>
-            <ProductDetail />
-            <SimilarProducts products={products} />
-            
-                      
+            <ProductDetail />           
+            <SimilarProducts products={products} />                   
         </div>
     );
 };

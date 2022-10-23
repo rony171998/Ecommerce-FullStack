@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { swal } from '../../components';
 import { setIsLoading } from './isLoading.slice';
 import { getMyProducts } from './user.slice';
 
 if (process.env.NODE_ENV === 'development') {
-    //axios.defaults.baseURL = 'http://localhost:4000/api/v1';
-    axios.defaults.baseURL = 'https://ecommerce-express.azurewebsites.net/api/v1';
+    axios.defaults.baseURL = 'http://localhost:4000/api/v1';
+    //axios.defaults.baseURL = 'https://ecommerce-express.azurewebsites.net/api/v1';
      
 } else {
     axios.defaults.baseURL = 'https://ecommerce-express.azurewebsites.net/api/v1';  
@@ -75,15 +76,24 @@ const getConfig = () => ({
 
 export const  postProduct = (formData) =>  (dispatch) => {   
     dispatch(setIsLoading(true));
+    
     return axios.post ("/products", formData, getConfig())
-        .then((res) => dispatch(alert(res.data.status)))
-        .catch((err) => dispatch(console.log(err)))
+        .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
+        .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
         .finally(() => dispatch(setIsLoading(false)));
 }
-export const deleteProduct = (id) => async (dispatch) => {
+export const pachProduct = (id , data) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.patch(`/products/${id}`,data, getConfig())
+        .then((res) => dispatch(console.log(res) , swal( "success" , res.statusText , "success") ))
+        .catch((err) => dispatch(console.log(err)))
+        .finally(() => dispatch(setIsLoading(false)))
+        .finally(() => dispatch(getMyProducts()));
+}
+export const deleteProduct = (id) => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.delete(`/products/${id}`, getConfig())
-        .then((res) => dispatch(alert(res.data.status)))
+        .then((res) => dispatch(console.log(res) , swal( "success" , res.statusText , "success") ))
         .catch((err) => dispatch(console.log(err)))
         .finally(() => dispatch(setIsLoading(false)))
         .finally(() => dispatch(getMyProducts()));

@@ -68,12 +68,11 @@ const getPurchases = catchAsync(async (req, res, next) => {
     const { sessionUser } = req;
 
     const purchases = await Order.findAll({
-        where: { userId: sessionUser.id },
+        where: { userId: sessionUser.id , status: "active"},
         include: [{ model: Cart
-            , include: [{ model: ProductsinCart, include: [{ model: Product }] }]
+            , include: [{ model: ProductsinCart, include: [{ model: Product , where: {status:"active"} }] }]
         }],
         
-
     });
 
     res.status(200).json({

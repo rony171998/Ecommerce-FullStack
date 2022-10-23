@@ -15,4 +15,7 @@ export {default as RangePrice} from "./RangePrice";
 export {default as ProductInHome} from "./ProductInHome";
 export {default as Emptyproduct} from "./Emptyproduct";
 export {default as Skeleton} from "./Skeleton";
+export { swal , LoadingSwal , ToastSigned } from "./swal";
+
+
 
