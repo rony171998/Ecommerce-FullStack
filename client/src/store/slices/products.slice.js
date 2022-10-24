@@ -86,15 +86,15 @@ export const pachProduct = (id , data) => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.patch(`/products/${id}`,data, getConfig())
         .then((res) => dispatch(console.log(res) , swal( "success" , res.statusText , "success") ))
-        .catch((err) => dispatch(console.log(err)))
+        .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
         .finally(() => dispatch(setIsLoading(false)))
-        .finally(() => dispatch(getMyProducts()));
+        .finally(() => dispatch(getProducts()));
 }
 export const deleteProduct = (id) => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.delete(`/products/${id}`, getConfig())
         .then((res) => dispatch(console.log(res) , swal( "success" , res.statusText , "success") ))
-        .catch((err) => dispatch(console.log(err)))
+        .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
         .finally(() => dispatch(setIsLoading(false)))
         .finally(() => dispatch(getMyProducts()));
 }

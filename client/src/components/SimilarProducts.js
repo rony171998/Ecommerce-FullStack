@@ -33,7 +33,7 @@ const SimilarProducts = ({ products }) => {
             {product.length &&
                 product?.map(
                     (product, index) =>
-                        //product.id != productId &&
+                        product.id != productId &&
                         index < 4 &&
                         index >= 0 && (
                             <Col key={product.id}>

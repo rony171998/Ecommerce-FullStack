@@ -28,10 +28,8 @@ const Login = () => {
     const submit = data => {
         LoadingSwal(isLoading);
         dispatch(login(data));
-        const token = localStorage.getItem("token");
-        if (token) {
         navigate("/");
-        }               
+                      
     };
 
     return (

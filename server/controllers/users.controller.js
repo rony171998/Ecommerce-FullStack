@@ -154,6 +154,15 @@ const getUserOrdersAll = catchAsync(async (req, res, next) => {
 	});
 });
 
+const getAllorders = catchAsync(async (req, res, next) => {
+	const orders = await Order.findAll();
+
+	res.status(200).json({
+		status: 'success',
+		orders,
+	});
+});
+
 const getUserOrderById = catchAsync(async (req, res, next) => {
 	const { order } = req;
 
@@ -169,4 +178,5 @@ module.exports = {
 	deleteUser,
 	getUserOrdersAll,
 	getUserOrderById,
+	getAllorders
 };

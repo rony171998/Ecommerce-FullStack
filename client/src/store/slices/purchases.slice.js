@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { setIsLoading } from "./isLoading.slice";
 import { swal } from '../../components';
+import { getCarts } from "./cart.slice";
 
 export const purchasesSlice = createSlice({
     name: "purcahses",
@@ -23,9 +24,11 @@ const getConfig = () => ({
 export const postCart = (data) => (dispatch) => {   
     dispatch(setIsLoading(true));
     return axios.post("/cart/purchase", data, getConfig())
+        .then((res) => dispatch(console.log(res)))
         .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
         .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
-        .finally(() => dispatch(setIsLoading(false)));
+        .finally(() => dispatch(setIsLoading(false)))
+        .finally(() => dispatch(getCarts));
 }
 
 export const getPurchases = () => (dispatch) => {   

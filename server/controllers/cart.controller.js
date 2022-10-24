@@ -68,19 +68,31 @@ const getPurchases = catchAsync(async (req, res, next) => {
     const { sessionUser } = req;
 
     const purchases = await Order.findAll({
-        where: { userId: sessionUser.id , status: "active"},
-        include: [{ model: Cart
-            , include: [{ model: ProductsinCart, include: [{ model: Product , where: {status:"active"} }] }]
-        }],
-        
+        where: { userId: sessionUser.id },
+        include: [
+            {
+                model: Cart,
+                include: [
+                    { model: ProductsinCart, include: [{ model: Product }] },
+                ],
+            },
+        ],
     });
 
     res.status(200).json({
         status: "success",
         purchases,
     });
-    
-})
+});
+
+const getPurchasesById = catchAsync(async (req, res, next) => {
+    const { order } = req;
+
+    res.status(200).json({
+        status: "success",
+        order,
+    });
+});
 
 const updateproductsinCart = catchAsync(async (req, res, next) => {
     const { sessionUser } = req;
@@ -100,9 +112,9 @@ const updateproductsinCart = catchAsync(async (req, res, next) => {
         if (!productExists) {
             return next(new AppError("Product is not in the cart", 400));
         } else {
-            const product= await Product.findOne({
+            const product = await Product.findOne({
                 where: { id: productId, status: "active" },
-            })
+            });
 
             if (quantity > product.quantity) {
                 return next(
@@ -111,22 +123,19 @@ const updateproductsinCart = catchAsync(async (req, res, next) => {
                         400
                     )
                 );
-            }else{
-
-                if(quantity == 0){
+            } else {
+                if (quantity == 0) {
                     await ProductsinCart.update(
-                        {status: "removed"},
-                        { where: { cartId: cart.id, productId } },
+                        { status: "removed" },
+                        { where: { cartId: cart.id, productId } }
                     );
-                }else{
-                  await ProductsinCart.update(
-                      { quantity , status: "active" },
-                      { where: { cartId: cart.id, productId } }
-                  );
+                } else {
+                    await ProductsinCart.update(
+                        { quantity, status: "active" },
+                        { where: { cartId: cart.id, productId } }
+                    );
                 }
-                
             }
-            
         }
     }
 
@@ -134,7 +143,7 @@ const updateproductsinCart = catchAsync(async (req, res, next) => {
 });
 
 const deleteproductsinCart = catchAsync(async (req, res, next) => {
-    const {  sessionUser } = req;
+    const { sessionUser } = req;
     const { id } = req.params;
 
     const cart = await Cart.findOne({
@@ -142,60 +151,68 @@ const deleteproductsinCart = catchAsync(async (req, res, next) => {
     });
     if (!cart) {
         return next(new AppError("Cart not found", 404));
-    }else{
+    } else {
         const productExists = await ProductsinCart.findOne({
             where: { cartId: cart.id, productId: id },
         });
         if (!productExists) {
             return next(new AppError("Product is not in the cart", 400));
-        }else{
-          await productExists.update({ status: 'removed', quantity: 0 });
-          res.status(200).json({ status: "success" });
+        } else {
+            await productExists.update({ status: "removed", quantity: 0 });
+            res.status(200).json({ status: "success" });
         }
-        
     }
-        
 });
 
 const postCartPurchase = catchAsync(async (req, res, next) => {
     const { sessionUser } = req;
 
-  const cart = await Cart.findOne({
-    where: { userId: sessionUser.id, status: 'active' },
-    include: [
-      {
-        model: ProductsinCart,
-        required: false,
-        where: { status: 'active' },
-        include: { model: Product },
-      },
-    ],
-  });
+    const cart = await Cart.findOne({
+        where: { userId: sessionUser.id, status: "active" },
+        include: [
+            {
+                model: ProductsinCart,
+                required: false,
+                where: { status: "active" },
+                include: { model: Product },
+            },
+        ],
+    });
 
-  if (!cart) {
-    return next(new AppError('Cart not found', 404));
-  }
-  
-  let totalPrice = 0;
-
-  const productsPurchasedPromises = cart.productsinCarts.map(async productInCart => {
-      const newQty = productInCart.product.quantity - productInCart.quantity;
-
-      const productPrice =
-        productInCart.quantity * +productInCart.product.price;
-
-      totalPrice += productPrice;
-
-      await productInCart.product.update({ quantity: newQty });
-
-      return await productInCart.update({ status: 'purchased' });
+    if (!cart) {
+        return next(new AppError("Cart not found", 404));
     }
-  );
 
-  await Promise.all(productsPurchasedPromises);
+    let totalPrice = 0;
 
-  res.status(200).json({ status: 'success' });
+    const productsPurchasedPromises = cart.productsinCarts.map(
+        async productInCart => {
+            const newQty =
+                productInCart.product.quantity - productInCart.quantity;
 
+            const productPrice =
+                productInCart.quantity * +productInCart.product.price;
+
+            totalPrice += productPrice;
+
+            await productInCart.product.update({ quantity: newQty });
+
+            return await productInCart.update({ status: "purchased" });
+        }
+    );
+
+    await Promise.all(productsPurchasedPromises);
+
+    const newOrder = await Order.create({
+        cartId: cart.id,
+        userId: sessionUser.id,
+        totalPrice: totalPrice,
+    });
+
+    res.status(200).json({
+        status: "success",
+        newOrder,
+    });
 });
 
 module.exports = {
@@ -204,5 +221,6 @@ module.exports = {
     updateproductsinCart,
     deleteproductsinCart,
     postCartPurchase,
-    getPurchases
+    getPurchases,
+    getPurchasesById,
 };

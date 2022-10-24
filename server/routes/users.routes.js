@@ -10,6 +10,7 @@ const {
 	deleteUser,
 	getUserOrdersAll,
 	getUserOrderById,
+	getAllorders
 } = require('../controllers/users.controller');
 
 
@@ -30,11 +31,13 @@ usersRouter.post('/', createUserValidators, createUser);
 
 usersRouter.post('/login', login);
 
+usersRouter.get('/ordersAll', getAllorders);
+
 usersRouter.use(protectSession);
 
 usersRouter.get('/me', getMeProducts);
 
-usersRouter.get('/orders/', getUserOrdersAll);
+usersRouter.get('/orders', getUserOrdersAll);
 
 usersRouter.get('/:id',userExists, getUserById);
 

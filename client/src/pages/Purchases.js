@@ -13,8 +13,6 @@ const Purchases = () => {
         dispatch(getPurchases());
     }, [dispatch]);
 
-    console.log(purchases);
-
     return (
         <Card>
             <Card.Header>
@@ -38,51 +36,33 @@ const Purchases = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {purchases.purchases?.map((purchaseItem, index) => (
-                                <>
-                                    {purchaseItem.cart?.productsinCarts.map(
-                                        purchaseItem => (
-                                            <tr
-                                                className="table-light"
-                                                key={purchaseItem.product.id}
-                                            >
-                                                <td>{index + 1}</td>
-                                                <td>
-                                                    {purchaseItem.product.title}
-                                                </td>
-                                                <td>
-                                                    {
-                                                        purchaseItem.product
-                                                            .quantity
-                                                    }
-                                                </td>
-                                                <td>
-                                                    ${" "}
-                                                    {purchaseItem.product.price}
-                                                </td>
-                                                <td>
-                                                    ${" "}
-                                                    {purchaseItem.product
-                                                        .quantity *
-                                                        purchaseItem.product
-                                                            .price}
-                                                </td>
-                                                <td>
-                                                    {
-                                                        purchaseItem.product
-                                                            .status
-                                                    }
-                                                </td>
-                                            </tr>
-                                        )
-                                    )}
-                                    <td>
-                                        {" "}
-                                        Created:{" "}
-                                        {purchaseItem.createdAt.substr(0, 16)}
-                                    </td>
-                                </>
-                            ))}
+                            {purchases.purchases?.[0].cart?.productsinCarts.map(
+                                (purchaseItem, indexcart) => (
+                                    <tr
+                                        className="table-light"
+                                        key={purchaseItem.product.id}
+                                    >
+                                        <td>{indexcart + 1}</td>
+                                        <td>{purchaseItem.product.title}</td>
+                                        <td>{purchaseItem.quantity}</td>
+                                        <td>$ {purchaseItem.product.price}</td>
+                                        <td>
+                                            ${" "}
+                                            {purchaseItem.quantity *
+                                                purchaseItem.product.price}
+                                        </td>
+                                        <td>{purchaseItem.status}</td>
+                                        <td>
+                                            {" "}
+                                            Created:{" "}
+                                            {purchaseItem.createdAt.substr(
+                                                0,
+                                                16
+                                            )}
+                                        </td>
+                                    </tr>
+                                )
+                            )}
                         </tbody>
                     </Table>
                 )}

@@ -88,7 +88,7 @@ const UserProducts = ({ userproducts }) => {
                                                     width: "2rem",
                                                 }}
                                                 onClick={() =>
-                                                    navigate("/addProduct")
+                                                    navigate(`/UpdateProduct/${product.id}`)
                                                 }
                                             />
                                         </Card.Title>

@@ -18,16 +18,9 @@ const Cart = () => {
 
     const removeItem = id => {
         dispatch(DelProductsToCart(id));
-        
     };
 
-    const refreshCart = () => {
-        dispatch(getCarts());
-        
-    };
-
-
-    
+    console.log(cart);
 
     return (
         <Card className="mt-3">
@@ -87,9 +80,7 @@ const Cart = () => {
                                 )}
                             </tbody>
                         </Table>
-                        <Button onClick={() => refreshCart()}>
-                            Refresh Cart
-                        </Button>
+                        
                         <Button className="mx-1" onClick={() => navigate("/cart/formdata")}>
                             Chekout
                         </Button>

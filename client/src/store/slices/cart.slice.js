@@ -33,7 +33,8 @@ export const addProductsToCart = (productId,quantitiesproduct) => (dispatch) => 
     return axios.post("/cart/add-product" , data, getConfig())
     .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
     .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
-    .finally(() => dispatch(setIsLoading(false)));
+    .finally(() => dispatch(setIsLoading(false)))
+    .finally(() => dispatch(getCarts));
 }
 export const pachProductsToCart = (productId,quantity) => (dispatch) => {
     const data = {productId, newQuantity: quantity}
@@ -41,14 +42,16 @@ export const pachProductsToCart = (productId,quantity) => (dispatch) => {
     return axios.patch("/cart/update-cart" , data, getConfig())
     .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
     .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
-    .finally(() => dispatch(setIsLoading(false)));
+    .finally(() => dispatch(setIsLoading(false)))
+    .finally(() => dispatch(getCarts));;
 }
 export const DelProductsToCart = (id) => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.delete(`/cart/${id}` , getConfig())
     .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
     .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
-    .finally(() => dispatch(setIsLoading(false)));
+    .finally(() => dispatch(setIsLoading(false)))
+    .finally(() => dispatch(getCarts));;
 }
 
 export default cartSlice.reducer;

@@ -26,7 +26,7 @@ export const LoadingSwal = ({isLoading}) =>{
       allowEnterKey: false,
       showConfirmButton: false,
       showCancelButton: false,
-      timer: 10000,
+      
       timerProgressBar: true,
       didOpen: () => {
          Swal.showLoading()

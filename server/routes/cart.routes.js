@@ -8,7 +8,8 @@ const {
     updateproductsinCart,
     deleteproductsinCart,
     postCartPurchase,
-	getPurchases
+	getPurchases,
+	getPurchasesById
 } = require('../controllers/cart.controller');
 
 
@@ -20,6 +21,8 @@ const {
 } = require('../middlewares/auth.middleware');
 
 const cartRouter = express.Router();
+
+cartRouter.get('/purchases/:id', getPurchasesById);
 
 cartRouter.use(protectSession);
 

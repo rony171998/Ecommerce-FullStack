@@ -53,24 +53,24 @@ const ProductDetail = () => {
     const submit = () => {
         dispatch(addProductsToCart(productId, quantitiesproduct));
     };
-    
+
     return (
         <Row>
             <Col sm="8">
                 <Card>
                     <Card.Body>
-                        <Carousel variant="dark">
-                            {product.productImgs?.length === 0 ? (
-                                <Card.Img
-                                    style={{
-                                        height: "55vh",
-                                        objectFit: "contain",
-                                    }}
-                                    src={"./no photo.jfif"}
-                                    alt="no photo"
-                                />
-                            ) : (
-                                product?.productImgs?.map(
+                        {product.productImgs?.length === 0 ? (
+                            <Card.Img
+                                style={{
+                                    height: "55vh",
+                                    objectFit: "contain",
+                                }}
+                                src={"./no photo.jfif"}
+                                alt="no photo"
+                            />
+                        ) : (
+                            <Carousel variant="dark">
+                                {product?.productImgs?.map(
                                     (productImg, index) => (
                                         <Carousel.Item key={index}>
                                             <Card.Img
@@ -86,9 +86,9 @@ const ProductDetail = () => {
                                             />
                                         </Carousel.Item>
                                     )
-                                )
-                            )}
-                        </Carousel>
+                                )}
+                            </Carousel>
+                        )}
                     </Card.Body>
                 </Card>
             </Col>
