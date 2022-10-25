@@ -57,10 +57,10 @@ const UserProducts = ({ userproducts }) => {
                 ) : products.length === 0 ? (
                     <Emptyproduct />
                 ) : (
-                    <Row md={3}>
+                    <Row  xs={1} md={2} lg={3} className="g-3">
                         {products?.map(product => (
                             <Col key={product.id}>
-                                <Card>
+                                <Card className="text-center">
                                     <Card.Header>
                                         <Card.Title>
                                             {product.title}

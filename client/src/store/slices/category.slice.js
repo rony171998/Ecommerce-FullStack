@@ -29,6 +29,48 @@ export const postCategory = (data) => (dispatch) => {
     return axios.post("/products/categories", data, getConfig())
         .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
         .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
-        .finally(() => dispatch(setIsLoading(false)));       
+        .finally(() => dispatch(setIsLoading(false)))
+        .finally(() => dispatch(getCategories()));       
 }
+
+export const pachCategory = (data) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return fetch(`/products/categories/${data.category}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(data)
+    })
+        .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
+        .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
+        .finally(() => dispatch(setIsLoading(false)))
+        .finally(() => dispatch(getCategories()));;
+}
+
+export const deleteCategory = (id) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.delete(`/products/categories/${id}`, getConfig())
+        .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
+        .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
+        .finally(() => dispatch(setIsLoading(false)))
+        .finally(() => dispatch(getCategories()));;
+}
+
+export const deletCategory = (id) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return fetch(`/products/categories/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+        .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
+        .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
+        .finally(() => dispatch(setIsLoading(false)))
+        .finally(() => dispatch(getCategories()));;
+}
+
 export default categorySlice.reducer;

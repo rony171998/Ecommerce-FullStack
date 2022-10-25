@@ -93,7 +93,7 @@ const ProductDetail = () => {
                 </Card>
             </Col>
             <Col>
-                <Card>
+                <Card style={{height:"55vh"}}>
                     <Card.Header>
                         <Card.Title>{product.title}</Card.Title>
                     </Card.Header>

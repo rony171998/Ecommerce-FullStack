@@ -19,12 +19,12 @@ const Category = () => {
             setProduct(products.filter(productsItem => productsItem.categoryId === Number(CategoryId)));
         }
             
-    }, [dispatch , products , CategoryId]);
+    }, [dispatch  , CategoryId]);
     
     return (
         <div>
             <Row className="my-3">
-                <Col lg={3}>
+                <Col md="3" className="text-center">
                     
                     <ListCategories />                   
                     <RangePrice />                   

@@ -11,8 +11,8 @@ const NavBar = () => {
         dispatch(getCategories());
     }, [dispatch]);
 
-    let categories = useSelector((state) => state.category);
-        
+    let categories = useSelector(state => state.category);
+
     return (
         <Navbar bg="primary" expand="lg">
             <Container>
@@ -20,55 +20,61 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="navbarColor02">
                     <Nav className="me-auto">
-                        <Nav.Link href="/" >Home</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
                         <NavDropdown title="Categories" id="basic-nav-dropdown">
-                            {
-                                categories.length !== 0  &&
-                                categories.categories.map((category) => (
-                                    <NavDropdown.Item key={category.id} href={`#/category/${category.id}`}>{category.name}</NavDropdown.Item>
-                                ))
-
-                            }
-                            
+                            {categories.length !== 0 &&
+                                categories.categories.map(category => (
+                                    <NavDropdown.Item
+                                        key={category.id}
+                                        href={`#/category/${category.id}`}
+                                    >
+                                        {category.name}
+                                    </NavDropdown.Item>
+                                ))}
                         </NavDropdown>
-
-                        
                     </Nav>
                     <Nav>
-                       <SearchBar /> 
+                        <SearchBar />
                     </Nav>
-                    
-                    <Nav>
-                        <Nav.Link
-                            
-                            href="#/User"
-                        ></Nav.Link>
 
-                        <NavDropdown title="User" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#/User">
-                                Profile
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#/login">
-                                Login
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#/signup">
-                                Sign Up
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#/addProduct">
-                                Add Product
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#/addCategory">
-                                Add Category
-                            </NavDropdown.Item>
-                        </NavDropdown>
-                        <Nav.Link href="#/cart">
+                    <Nav>
+                        <Nav.Link href="#/User">
+                            
+                            <NavDropdown title="User" id="basic-nav-dropdown">
+                            
+                                <NavDropdown.Item href="#/User">
+                                    Profile
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="#/login">
+                                    Login
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#/signup">
+                                    Sign Up
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#/addProduct">
+                                    Add Product
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#/addCategory">
+                                    Add Category
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav.Link>
+
+                        <Nav.Link className="mt-2" href="#/cart">
                             <Card.Img
                                 style={{ width: "25px" }}
                                 src="https://cdn-icons-png.flaticon.com/512/6948/6948348.png"
-                            ></Card.Img>Cart
+                            ></Card.Img>
+                            Cart
                         </Nav.Link>
-                        <Nav.Link href="#/purchases">My Purcheses</Nav.Link>
+                        <Nav.Link className="mt-2" href="#/purchases">
+                            <Card.Img
+                                style={{ width: "25px" }}
+                                src="https://img.icons8.com/external-basicons-color-danil-polshin/50/000000/external-purchases-shopping-carts-baskets-basicons-color-danil-polshin.png"
+                            ></Card.Img>
+                            My Purcheses
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

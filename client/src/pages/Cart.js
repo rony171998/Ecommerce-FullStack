@@ -20,8 +20,6 @@ const Cart = () => {
         dispatch(DelProductsToCart(id));
     };
 
-    console.log(cart);
-
     return (
         <Card className="mt-3">
             <Card.Header>
@@ -37,7 +35,7 @@ const Cart = () => {
                     
                     <>
                         <Table striped bordered hover>
-                            <thead>
+                            <thead className="text-center">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
@@ -51,14 +49,22 @@ const Cart = () => {
                                 {cart.productsinCarts?.map(
                                     (cartItem, index) => (
                                         <tr
-                                            className="table-light "
-                                            key={index}
-                                            onClick={() => navigate(`/products/${cartItem.productId}`)}
-                                            style={{cursor:"pointer"}}
+                                            className="table-light text-center"
+                                            key={index}               
                                         >
                                             <td>{index + 1}</td>
-                                            <td>{cartItem.product.title}</td>
-                                            <td>{cartItem.quantity}</td>
+                                            <td
+                                                onClick={() => navigate(`/products/${cartItem.productId}`)}
+                                                style={{cursor:"pointer" }}
+                                            >
+                                                <a className="card-link">{cartItem.product.title}</a>
+                                                
+                                            </td>
+                                            <td className="input-group mx-auto">
+                                                <Button>-</Button>
+                                                <label className="input-group-text  mx-auto">{cartItem.quantity}</label>                  
+                                                <Button>+</Button>
+                                            </td>
                                             <td>$ {cartItem.product.price}</td>
                                             <td>
                                                 ${" "}

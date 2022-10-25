@@ -17,7 +17,7 @@ const SearchBar = () => {
     };
 
     return (
-        <div className="px-5" style={{ width: "35vw" }}>
+        <div className="px-auto d-flex" >
             <Form  onSubmit={handleSubmit(submit)}>
                 <InputGroup>
                     <FormControl

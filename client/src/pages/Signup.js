@@ -34,7 +34,7 @@ const Signup = () => {
     };
     return (
         <div>
-            <Card
+            <Card 
                 style={{ maxWidth: "500px" }}
                 className="mx-auto mt-5 text-center"
             >

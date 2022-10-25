@@ -15,17 +15,17 @@ const ProductInHome = () => {
             {products.length === 0 || categories.length === 0 ? (
                 <Emptyproduct />
             ) : (
-                <Row md={2}>
+                <Row  xs={1} md={2} lg={2} className="g-3">
                     {categories.categories?.map((category , index) => 
                         index < 4 && (
                     
                         <Col key={category.id} >
-                            <Card className="my-3" style={{ cursor:"pointer"}}>
+                            <Card className="text-center" style={{ cursor:"pointer"}}>
                                 <Card.Header>
-                                    <h4>{category.name}</h4>
+                                    <Card.Title>{category.name}</Card.Title>
                                 </Card.Header>
-                                <Card.Body>
-                                    <Carousel controls="true">
+                                <Card.Body className="p-0">
+                                    <Carousel>
                                         {products
                                             .filter(
                                                 product =>
@@ -41,19 +41,18 @@ const ProductInHome = () => {
                                                         )
                                                     }
                                                 >
+
                                                     <Card.Img
+                                                        variant="top"
                                                         src={product.productImgs[0]
                                                             ?.imgUrl ?? "./no photo.jfif"}
                                                         alt={product.title}
-                                                        style={{
-                                                            height: "25rem",
-                                                            objectFit: "contain",
+                                                        style={{                                                                                               
+                                                            height: "20em",
+                                                            objectFit: "contain",                                           
                                                         }}
                                                     />
-                                                    <Carousel.Caption>
-                                                        <h3>{product.title}</h3>
-                                                        
-                                                    </Carousel.Caption>
+                                                    
                                                 </Carousel.Item>
                                             ))}
                                     </Carousel>

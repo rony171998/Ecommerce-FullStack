@@ -16,7 +16,7 @@ const Weather = () => {
     }, []);
 
     return (
-        <Card className="Weather">
+        <Card>
             <Card.Header className="bg-primary">
                 <Card.Title className="text-white">Weather</Card.Title>
             </Card.Header>
@@ -25,7 +25,7 @@ const Weather = () => {
                 <Card.Text>{Weather.name} ,{Weather.sys?.country}</Card.Text>
                 
                 <Card.Img
-                    style={{  height: "200px" }}
+                    style={{  height: "10rem" }}
                     src="https://cdn-icons-png.flaticon.com/512/5088/5088080.png"
                     alt=""
                 />

@@ -10,7 +10,7 @@ const ProductCard = ({ products }) => {
 
     return (
         <ListGroup>
-            <Row md={3}>
+            <Row  xs={1} md={2} lg={3} className="g-3">
                 {products.lenght === 0 ? (
                     <Emptyproduct />
                 ) : (
@@ -24,6 +24,7 @@ const ProductCard = ({ products }) => {
                                     numberinpage && (
                                 <Col key={product.id}>
                                     <Card
+                                        className="text-center"
                                         style={{ cursor: "pointer" }}
                                         onClick={() =>
                                             Navigate(`/products/${product.id}`)

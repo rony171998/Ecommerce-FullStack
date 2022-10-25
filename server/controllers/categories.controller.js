@@ -1,6 +1,8 @@
 const { Category } = require('../models/category.model');
 const { Product } = require('../models/product.model');
 
+const { AppError } = require('../utils/appError.util');
+
 const {catchAsync} = require('../utils/catchAsync.util');
 
 
@@ -49,9 +51,15 @@ const patchCategories = catchAsync(async (req, res, next) => {
 const deleteCategories = catchAsync(async (req, res, next) => {
 	const { category } = req;
 
+	const products = await Product.findAll({ where: { categoryId: category.id , status: "active"} });
+
+	if (products.length > 0) {
+		return next(new AppError('Category has products', 400));
+	}
+
 	await category.update({ status: 'deleted' });
 
-	res.status(200).json({ status: 'success' });
+	res.status(200).json({ status: 'success' , products});
 })
 
 module.exports = {

@@ -19,6 +19,7 @@ const User = () => {
 
     useEffect(() => {
         dispatch(getMyProducts());
+        
     }, [dispatch]);
 
     let user = useSelector(state => state.user);
