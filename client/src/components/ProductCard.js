@@ -35,9 +35,9 @@ const ProductCard = ({ products }) => {
                                                 {product.title}
                                             </Card.Title>
                                         </Card.Header>
-                                        <Card.Body>
+                                        <Card.Body className="py-1 px-0">
                                             <Card.Img
-                                                alt={"Image" + product.title}
+                                                alt={"Image " + product.title}
                                                 src={
                                                     product.productImgs?.[0]
                                                         ?.imgUrl ??

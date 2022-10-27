@@ -37,7 +37,9 @@ const Purchases = () => {
                         </thead>
                         <tbody>
                             {purchases.purchases?.[0].cart?.productsinCarts.map(
-                                (purchaseItem, indexcart) => (
+                                (purchaseItem, indexcart) => 
+                                    purchaseItem.status === "purchased" && (
+                                
                                     <tr
                                         className="table-light"
                                         key={purchaseItem.product.id}

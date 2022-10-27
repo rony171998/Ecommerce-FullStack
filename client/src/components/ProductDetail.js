@@ -68,6 +68,7 @@ const ProductDetail = () => {
                                 src={"./no photo.jfif"}
                                 alt="no photo"
                             />
+                            
                         ) : (
                             <Carousel variant="dark">
                                 {product?.productImgs?.map(

@@ -20,7 +20,9 @@ export const productsSlice = createSlice({
         setProducts: (state, action) => {
             return action.payload
         }
-    }
+    },
+    
+
 })
 export const { setProducts  } = productsSlice.actions;
 
@@ -80,7 +82,8 @@ export const  postProduct = (formData) =>  (dispatch) => {
     return axios.post ("/products", formData, getConfig())
         .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
         .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
-        .finally(() => dispatch(setIsLoading(false)));
+        .finally(() => dispatch(setIsLoading(false)))
+        .finally(() => dispatch(getProducts()));
 }
 export const pachProduct = (id , data) => (dispatch) => {
     dispatch(setIsLoading(true));

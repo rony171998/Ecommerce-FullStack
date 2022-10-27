@@ -16,10 +16,9 @@ const PurchaseData = () => {
         <div>
             <Card className="mt-3">
                 <Card.Body className="mt-3">
-                    <h1>Personal Data</h1>
+                    <h1>Shipping Address</h1>
                     <Form onSubmit={handleSubmit(submit)}>
                         
-
                         <Form.Group
                             className="mb-3"
                             controlId="formBasicStreet"
@@ -31,6 +30,7 @@ const PurchaseData = () => {
                                 {...register("street")}
                                 type="text"
                                 placeholder="Enter direcction"
+                                required
                             />
                         </Form.Group>
 
@@ -45,6 +45,7 @@ const PurchaseData = () => {
                                 {...register("colony")}
                                 type="text"
                                 placeholder="Enter colony o barrio"
+                                required
                             />
                         </Form.Group>
 
@@ -57,8 +58,9 @@ const PurchaseData = () => {
 
                             <Form.Control
                                 {...register("zidcode")}
-                                type="text"
+                                type="number"
                                 placeholder="Enter zidcode (codigo postal)"
+                                required
                             />
                         </Form.Group>
 
@@ -70,6 +72,7 @@ const PurchaseData = () => {
                                 {...register("city")}
                                 type="text"
                                 placeholder="Enter city"
+                                required
                             />
                         </Form.Group>
 

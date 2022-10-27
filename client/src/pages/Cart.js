@@ -19,6 +19,7 @@ const Cart = () => {
     const removeItem = id => {
         dispatch(DelProductsToCart(id));
     };
+        
 
     return (
         <Card className="mt-3">
@@ -61,9 +62,9 @@ const Cart = () => {
                                                 
                                             </td>
                                             <td className="input-group mx-auto">
-                                                <Button>-</Button>
+                                                
                                                 <label className="input-group-text  mx-auto">{cartItem.quantity}</label>                  
-                                                <Button>+</Button>
+                                                
                                             </td>
                                             <td>$ {cartItem.product.price}</td>
                                             <td>

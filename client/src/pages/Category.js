@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ListCategories, Paginations, ProductCard, RangePrice ,Weather  } from "../components"; 
+import { Emptyproduct, ListCategories, Paginations, ProductCard, RangePrice ,Weather  } from "../components"; 
 import { getProducts } from "../store/slices/products.slice";
 
 const Category = () => {
@@ -27,21 +27,23 @@ const Category = () => {
                 <Col md="3" className="text-center">
                     
                     <ListCategories />                   
-                    <RangePrice />                   
+                    <RangePrice products={products} setProduct={setProduct} CategoryId={CategoryId} />                   
                     <Weather />
-                    
 
                 </Col>
                 <Col>
                     {
-                        product.length &&
+                        product.length === 0 ?
+                        (
+                            <Emptyproduct />
+                        )
+                        :
                         (
                             <> 
                                 <ProductCard products={product}/>
                                 <Paginations  products={product}/>
                             </>
                         )
-
                     }
                     
                 </Col>

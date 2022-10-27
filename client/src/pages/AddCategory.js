@@ -56,18 +56,17 @@ const AddProduct = () => {
 export const UpdateCategory = () => {
     const { register , handleSubmit } = useForm();
     const dispatch = useDispatch();
+    let categories = useSelector(state => state.category);
 
     const submit = data => {
         
         if (data.name) {
-            dispatch(postCategory(data));
+           dispatch(pachCategory(data)); 
         }else{
             swal("Error", "You must enter a name category", "error");
         }
-        dispatch(pachCategory(data));
+        
     };
-
-    let categories = useSelector(state => state.category);
 
     return (
         <Card className="mx-auto mt-3 text-center">

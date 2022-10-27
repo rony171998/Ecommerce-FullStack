@@ -8,10 +8,13 @@ import { Slider, ProductInHome, Skeleton , LoadingSwal  } from "../components";
 const Home = () => {
     
     const isLoading = useSelector(state => state.isLoading);
+    const products = useSelector(state => state.products);
     const dispatch = useDispatch();
     useEffect(() => {
-        
-        dispatch(getProducts());
+        if (products.length === 0) {
+            dispatch(getProducts());
+        }
+           
     }, [dispatch]);
     
     return (

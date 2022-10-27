@@ -13,6 +13,10 @@ const NavBar = () => {
 
     let categories = useSelector(state => state.category);
 
+    const logout = () => {
+        localStorage.setItem("token", "");
+    };
+
     return (
         <Navbar bg="primary" expand="lg">
             <Container>
@@ -57,6 +61,9 @@ const NavBar = () => {
                                 </NavDropdown.Item>
                                 <NavDropdown.Item href="#/addCategory">
                                     Add Category
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#/login" onClick={() => logout()}>
+                                    Logout
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </Nav.Link>

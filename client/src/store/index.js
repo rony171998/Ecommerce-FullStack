@@ -14,5 +14,10 @@ export default configureStore({
     cart,
     purchases,
     user
-  }
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+    
 });

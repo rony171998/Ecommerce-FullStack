@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { Button, Card, FormControl, InputGroup } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { filterProductsByPrices } from "../store/slices/products.slice";
 
-const RangePrice = () => {
+const RangePrice = ({products , setProduct , CategoryId}) => {
     const [priceRangeMin, setPriceRangeMin] = useState(0);
     const [priceRangeMax, setPriceRangeMax] = useState(1000);
 
-    const dispatch = useDispatch();
-
     const searchProductByPrices =( priceRangeMin , priceRangeMax )=> {
-        dispatch(filterProductsByPrices(priceRangeMin, priceRangeMax));
-        
+        setProduct(          
+            products.filter(productsItem => productsItem.categoryId === Number(CategoryId) && productsItem.price >= priceRangeMin && productsItem.price <= priceRangeMax)
+        ) 
     }
+
+    const deleteFilter = () => {
+        setProduct(
+            products.filter(productsItem => productsItem.categoryId === Number(CategoryId))
+        );
+        setPriceRangeMin(0);
+        setPriceRangeMax(1000);
+    }
+    
     return (
         <div>
             <Card className="mb-3">
@@ -32,7 +38,6 @@ const RangePrice = () => {
                             value={priceRangeMin}
                             type="Number"
                             min={0}
-                            max={10000}
                             aria-label="amoun"
                         />
                     </InputGroup>
@@ -44,7 +49,6 @@ const RangePrice = () => {
                             onChange={e => setPriceRangeMax(e.target.value)}
                             value={priceRangeMax}
                             min={0}
-                            max={10000}
                             type="Number"
                         />
                     </InputGroup>
@@ -57,6 +61,13 @@ const RangePrice = () => {
                         }
                     >
                         Filter by price
+                    </Button>
+                    <Button
+                        className="ms-2"
+                        variant="danger"
+                        onClick={() => deleteFilter()}
+                    >
+                        delete Filter
                     </Button>
                 </Card.Body>
             </Card>
