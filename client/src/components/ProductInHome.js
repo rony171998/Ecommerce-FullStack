@@ -17,7 +17,7 @@ const ProductInHome = () => {
             ) : (
                 <Row  xs={1} md={2} lg={2} className="g-3">
                     {categories.categories?.map((category , index) => 
-                        index < 4 && (
+                        index < 6 && (
                     
                         <Col key={category.id} >
                             <Card className="text-center" style={{ cursor:"pointer"}}>
