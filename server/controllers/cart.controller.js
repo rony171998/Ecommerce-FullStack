@@ -39,7 +39,7 @@ const createproductsinCart = catchAsync(async (req, res, next) => {
         });
     } else {
         const productExists = await ProductsinCart.findOne({
-            where: { cartId: cart.id, productId },
+            where: { cartId: cart.id, productId , status: "active" },
         });
 
         if (productExists) {
@@ -72,6 +72,7 @@ const getPurchases = catchAsync(async (req, res, next) => {
         include: [
             {
                 model: Cart,
+                
                 include: [
                     { model: ProductsinCart, include: [{ model: Product }] },
                 ],
@@ -86,11 +87,24 @@ const getPurchases = catchAsync(async (req, res, next) => {
 });
 
 const getPurchasesById = catchAsync(async (req, res, next) => {
-    const { order } = req;
+    const { order , sessionUser } = req;
+
+    const purchases = await Order.findOne({
+        where: { id: order.id, userId: sessionUser.id },
+        include: [
+            {
+                model: Cart,
+                include: [
+                    { model: ProductsinCart, include: [{ model: Product }] },
+                ],
+            },
+        ],
+    });
+
 
     res.status(200).json({
         status: "success",
-        order,
+        purchases,
     });
 });
 
@@ -124,7 +138,7 @@ const updateproductsinCart = catchAsync(async (req, res, next) => {
                     )
                 );
             } else {
-                if (quantity == 0) {
+                if (quantity === 0) {
                     await ProductsinCart.update(
                         { status: "removed" },
                         { where: { cartId: cart.id, productId } }
@@ -158,7 +172,7 @@ const deleteproductsinCart = catchAsync(async (req, res, next) => {
         if (!productExists) {
             return next(new AppError("Product is not in the cart", 400));
         } else {
-            await productExists.update({ status: "removed", quantity: 0 });
+            await productExists.update({ status: "removed" });
             res.status(200).json({ status: "success" });
         }
     }
@@ -172,7 +186,6 @@ const postCartPurchase = catchAsync(async (req, res, next) => {
         include: [
             {
                 model: ProductsinCart,
-                required: false,
                 where: { status: "active" },
                 include: { model: Product },
             },
@@ -185,17 +198,19 @@ const postCartPurchase = catchAsync(async (req, res, next) => {
 
     let totalPrice = 0;
 
-    const productsPurchasedPromises = cart.productsinCarts.map(
-        async productInCart => {
-            const newQty =
-                productInCart.product.quantity - productInCart.quantity;
+    const productsPurchasedPromises = cart.productsinCarts.map(async productInCart => {
+        
+            const newQty = productInCart.product.quantity - productInCart.quantity;
+                
 
-            const productPrice =
-                productInCart.quantity * +productInCart.product.price;
+            const productPrice =productInCart.quantity * +productInCart.product.price;
+                
 
             totalPrice += productPrice;
 
             await productInCart.product.update({ quantity: newQty });
+
+            await cart.update({ status: "inactive" });
 
             return await productInCart.update({ status: "purchased" });
         }
@@ -207,6 +222,7 @@ const postCartPurchase = catchAsync(async (req, res, next) => {
         cartId: cart.id,
         userId: sessionUser.id,
         totalPrice: totalPrice,
+        
     });
 
     res.status(200).json({

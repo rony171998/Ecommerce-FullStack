@@ -24,7 +24,7 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="navbarColor02">
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="#/">Home</Nav.Link>
                         <NavDropdown title="Categories" id="basic-nav-dropdown">
                             {categories.length !== 0 &&
                                 categories.categories.map(category => (

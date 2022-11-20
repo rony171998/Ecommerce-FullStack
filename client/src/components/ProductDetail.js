@@ -56,7 +56,7 @@ const ProductDetail = () => {
 
     return (
         <Row>
-            <Col sm="8">
+            <Col lg="8">
                 <Card>
                     <Card.Body>
                         {product.productImgs?.length === 0 ? (
@@ -68,7 +68,6 @@ const ProductDetail = () => {
                                 src={"./no photo.jfif"}
                                 alt="no photo"
                             />
-                            
                         ) : (
                             <Carousel variant="dark">
                                 {product?.productImgs?.map(
@@ -94,7 +93,7 @@ const ProductDetail = () => {
                 </Card>
             </Col>
             <Col>
-                <Card style={{height:"55vh"}}>
+                <Card style={{ height: "55vh" }}>
                     <Card.Header>
                         <Card.Title>{product.title}</Card.Title>
                     </Card.Header>
@@ -105,6 +104,10 @@ const ProductDetail = () => {
 
                         <Card.Text>
                             Description: {product.description}
+                        </Card.Text>
+
+                        <Card.Text>
+                            Fecha Publicacion: {product.createdAt?.substr(0, 10) ?? product.createdAt}
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>

@@ -21,52 +21,70 @@ const Purchases = () => {
             <Card.Body>
                 {isLoading ? (
                     <LoadingScreen />
-                ) : purchases.purchases?.length === 0 ? (
+                ) : purchases.length === 0 ? (
                     <Emptyproduct />
                 ) : (
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Sub Total</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {purchases.purchases?.[0].cart?.productsinCarts.map(
-                                (purchaseItem, indexcart) => 
-                                    purchaseItem.status === "purchased" && (
-                                
-                                    <tr
-                                        className="table-light"
-                                        key={purchaseItem.product.id}
-                                    >
-                                        <td>{indexcart + 1}</td>
-                                        <td>{purchaseItem.product.title}</td>
-                                        <td>{purchaseItem.quantity}</td>
-                                        <td>$ {purchaseItem.product.price}</td>
-                                        <td>
-                                            ${" "}
-                                            {purchaseItem.quantity *
-                                                purchaseItem.product.price}
+                    <>
+                        {purchases.map((purchaseItem, index) => (
+                            <Table striped bordered hover key={index}>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {purchaseItem.cart?.productsinCarts.map(
+                                        (productsinCartsItem, indexcart) => (
+                                            <tr
+                                                className="table-light"
+                                                key={indexcart}
+                                            >
+                                                <td>
+                                                    {
+                                                        productsinCartsItem
+                                                            .product.title
+                                                    }
+                                                </td>
+
+                                                <td>
+                                                    {
+                                                        productsinCartsItem.quantity
+                                                    }
+                                                </td>
+                                                <td>
+                                                    ${" "}
+                                                    {
+                                                        productsinCartsItem
+                                                            .product.price
+                                                    }
+                                                </td>
+                                                <td>
+                                                    ${" "}
+                                                    {productsinCartsItem.quantity *
+                                                        productsinCartsItem
+                                                            .product.price}
+                                                </td>
+                                            </tr>
+                                        )
+                                    )}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colSpan="2">Total</td>
+                                        <td colSpan="1">
+                                            {purchaseItem.createdAt}
                                         </td>
-                                        <td>{purchaseItem.status}</td>
                                         <td>
-                                            {" "}
-                                            Created:{" "}
-                                            {purchaseItem.createdAt.substr(
-                                                0,
-                                                16
-                                            )}
+                                            ${" " + purchaseItem.totalPrice}
                                         </td>
                                     </tr>
-                                )
-                            )}
-                        </tbody>
-                    </Table>
+                                </tfoot>
+                            </Table>
+                        ))}
+                    </>
                 )}
             </Card.Body>
         </Card>

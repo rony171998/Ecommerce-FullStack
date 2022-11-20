@@ -43,6 +43,12 @@ const patchCategories = catchAsync(async (req, res, next) => {
 	const { category } = req;
 	const { name } = req.body;
 
+	const products = await Product.findAll({ where: { categoryId: category.id , status: "active"} });
+
+	if (products.length > 0) {
+		return next(new AppError('Category has products', 400));
+	}
+
 	await category.update({ name });
 
 	res.status(200).json({ status: 'success', category });

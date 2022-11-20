@@ -7,9 +7,6 @@ const {
     getAllproductsinCart,
     updateproductsinCart,
     deleteproductsinCart,
-    postCartPurchase,
-	getPurchases,
-	getPurchasesById
 } = require('../controllers/cart.controller');
 
 
@@ -22,13 +19,9 @@ const {
 
 const cartRouter = express.Router();
 
-cartRouter.get('/purchases/:id', getPurchasesById);
-
 cartRouter.use(protectSession);
 
 cartRouter.get('/', getAllproductsinCart);
-
-cartRouter.get('/purchases', getPurchases);
 
 cartRouter.delete('/:id', deleteproductsinCart)
 
@@ -36,6 +29,5 @@ cartRouter
 	
 	.post('/add-product', createproductsinCartValidators, createproductsinCart)
 	.patch('/update-cart', updateproductsinCart)
-	.post('/purchase', postCartPurchase);
 
 module.exports = { cartRouter };

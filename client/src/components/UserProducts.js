@@ -57,14 +57,14 @@ const UserProducts = ({ userproducts }) => {
                 ) : products.length === 0 ? (
                     <Emptyproduct />
                 ) : (
-                    <Row  xs={1} md={2} lg={3} className="g-3">
+                    <Row xs={1} md={2} lg={3} className="g-3">
                         {products?.map(product => (
                             <Col key={product.id}>
                                 <Card className="text-center">
                                     <Card.Header>
                                         <Card.Title>
                                             {product.title}
-                                            
+
                                             {product.status === "active" && (
                                                 <Card.Img
                                                     src="https://img.icons8.com/color/48/000000/delete-forever.png"
@@ -80,17 +80,21 @@ const UserProducts = ({ userproducts }) => {
                                                     }
                                                 />
                                             )}
-                                            <Card.Img
-                                                src="https://img.icons8.com/color/48/000000/edit--v1.png"
-                                                style={{
-                                                    cursor: "pointer",
-                                                    float: "right",
-                                                    width: "2rem",
-                                                }}
-                                                onClick={() =>
-                                                    navigate(`/UpdateProduct/${product.id}`)
-                                                }
-                                            />
+                                            {product.status === "active" && (
+                                                <Card.Img
+                                                    src="https://img.icons8.com/color/48/000000/edit--v1.png"
+                                                    style={{
+                                                        cursor: "pointer",
+                                                        float: "right",
+                                                        width: "2rem",
+                                                    }}
+                                                    onClick={() =>
+                                                        navigate(
+                                                            `/UpdateProduct/${product.id}`
+                                                        )
+                                                    }
+                                                />
+                                            )}
                                         </Card.Title>
                                     </Card.Header>
 

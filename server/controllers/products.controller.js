@@ -58,6 +58,8 @@ const getAllProduct = catchAsync(async (req, res, next) => {
                 attributes: ["id", "imgUrl"],
             },
         ],
+        
+        
     });
     
 	const newpro= products.map(async product => {

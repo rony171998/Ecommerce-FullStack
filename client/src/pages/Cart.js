@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { Button, Card, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCarts, DelProductsToCart } from "../store/slices/cart.slice";
+import { getCarts, DelProductsToCart, pachProductsToCart } from "../store/slices/cart.slice";
 import { Emptyproduct, LoadingScreen } from "../components";
 
 const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [quantity, setQuantity] = React.useState();
     
     let cart = useSelector(state => state.cart);
     const isLoading = useSelector(state => state.isLoading);
@@ -19,7 +20,12 @@ const Cart = () => {
     const removeItem = id => {
         dispatch(DelProductsToCart(id));
     };
-        
+
+    const handleAddQuantity = (quantity, id) => {
+        console.log(quantity++, id);
+        dispatch(pachProductsToCart( id,quantity++));
+       
+    };
 
     return (
         <Card className="mt-3">
@@ -62,9 +68,11 @@ const Cart = () => {
                                                 
                                             </td>
                                             <td className="input-group mx-auto">
-                                                
-                                                <label className="input-group-text  mx-auto">{cartItem.quantity}</label>                  
-                                                
+                                                <Button>-</Button>
+                                                <label className="input-group-text  mx-auto">{ cartItem.quantity}</label>                  
+                                                <Button 
+                                                    onClick={(e) => handleAddQuantity(cartItem.quantity, cartItem.productId)}
+                                                >+</Button>
                                             </td>
                                             <td>$ {cartItem.product.price}</td>
                                             <td>

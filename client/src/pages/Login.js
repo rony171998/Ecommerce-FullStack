@@ -26,7 +26,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const submit = data => {
-        LoadingSwal(isLoading);
+        //LoadingSwal(isLoading);
         dispatch(login(data));
         navigate("/");
                       

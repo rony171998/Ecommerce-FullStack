@@ -23,8 +23,7 @@ const getConfig = () => ({
 
 export const postCart = (data) => (dispatch) => {   
     dispatch(setIsLoading(true));
-    return axios.post("/cart/purchase", data, getConfig())
-        .then((res) => dispatch(console.log(res)))
+    return axios.post("/purchases", data, getConfig())
         .then((res) => dispatch(swal( "success" , res.statusText , "success") ))
         .catch((err) => dispatch(console.log(err) , swal("Error", err.response.data.message, "error")))
         .finally(() => dispatch(setIsLoading(false)))
@@ -33,8 +32,8 @@ export const postCart = (data) => (dispatch) => {
 
 export const getPurchases = () => (dispatch) => {   
     dispatch(setIsLoading(true));
-    return axios.get("/cart/purchases", getConfig())
-        .then((res) => dispatch(setPurchases(res.data)))
+    return axios.get("/purchases", getConfig())
+        .then((res) => dispatch(setPurchases(res.data.purchases)))
         .finally(() => dispatch(setIsLoading(false)));
 }
 
