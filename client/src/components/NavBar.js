@@ -26,15 +26,14 @@ const NavBar = () => {
                     <Nav className="me-auto">
                         <Nav.Link href="#/">Home</Nav.Link>
                         <NavDropdown title="Categories" id="basic-nav-dropdown">
-                            {categories.length !== 0 &&
-                                categories.categories.map(category => (
-                                    <NavDropdown.Item
-                                        key={category.id}
-                                        href={`#/category/${category.id}`}
-                                    >
-                                        {category.name}
-                                    </NavDropdown.Item>
-                                ))}
+                            {categories.categories?.map(category => (
+                                <NavDropdown.Item
+                                    key={category.id}
+                                    href={`#/category/${category.id}`}
+                                >
+                                    {category.name}
+                                </NavDropdown.Item>
+                            ))}
                         </NavDropdown>
                     </Nav>
                     <Nav>
@@ -42,31 +41,30 @@ const NavBar = () => {
                     </Nav>
 
                     <Nav>
-                        <Nav.Link href="#/User">
-                            
-                            <NavDropdown title="User" id="basic-nav-dropdown">
-                            
-                                <NavDropdown.Item href="#/User">
-                                    Profile
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#/login">
-                                    Login
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#/signup">
-                                    Sign Up
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#/addProduct">
-                                    Add Product
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#/addCategory">
-                                    Add Category
-                                </NavDropdown.Item>
-                                <NavDropdown.Item href="#/login" onClick={() => logout()}>
-                                    Logout
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav.Link>
+                        <NavDropdown className="mt-2" title="User" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="#/User">
+                                Profile
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="#/login">
+                                Login
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="#/signup">
+                                Sign Up
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="#/addProduct">
+                                Add Product
+                            </NavDropdown.Item>
+                            <NavDropdown.Item href="#/addCategory">
+                                Add Category
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                                href="#/login"
+                                onClick={() => logout()}
+                            >
+                                Logout
+                            </NavDropdown.Item>
+                        </NavDropdown>
 
                         <Nav.Link className="mt-2" href="#/cart">
                             <Card.Img
